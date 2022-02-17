@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /src/backend/
+Sitemap: https://c-auth.com/sitemap.xml

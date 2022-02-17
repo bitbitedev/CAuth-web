@@ -1,0 +1,11 @@
+#home {
+    #goals {
+        display: flex;
+        justify-content: space-evenly;
+        .goal {
+            margin: 20px;
+            text-align: center;
+            width: 200px;
+        }
+    }
+}
