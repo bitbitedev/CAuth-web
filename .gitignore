@@ -1,4 +1,5 @@
 
 backend/dbconf.php
+backend/dependencies/CAuth-api-php/
 style/*
 templates/style/files.json
