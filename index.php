@@ -15,7 +15,7 @@
 	require("./backend/databaseManager.php");
 	require("./backend/scssAutoCompiler.php");
 
-	$db = new DatabaseManager();
+	//$db = new DatabaseManager();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,6 +53,14 @@
 				</a>
 				<menu>
 					<a href="/about"<?=($requestedSite=="about")?" selected":""?>>About</a>
+					<?php
+						if(isset($_SESSION["id"])) {
+							?><a href="/dashboard"<?=($requestedSite=="dashboard")?" selected":""?>>Dashboard</a>
+							<a href="/logout" class="error">Logout <i class="material-icons">exit_to_app</i></a><?php
+						} else {
+							?><a href="/signin"<?=($requestedSite=="signin")?" selected":""?>>Sign in <i class="material-icons">account_circle</i></a><?php
+						}
+					?>
 				</menu>
 			</div>
 		</header>
