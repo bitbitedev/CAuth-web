@@ -1,5 +1,7 @@
 <?php
 
+    include($_SERVER['DOCUMENT_ROOT']."/backend/DirectAccessChecker.php");
+
     if(!isset($_SESSION["id"])){
         header("Location: /");
     }

@@ -1,3 +1,6 @@
+<?php
+    include($_SERVER['DOCUMENT_ROOT']."/backend/DirectAccessChecker.php");
+?>
 <div id="home" class="content">
     <h1>Cryptographic Authentication - the next step for privacy and digital security in the Internet</h1>
     <p>
