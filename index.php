@@ -24,8 +24,8 @@
 		<base href="/">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#FBB4CB">
-        <meta name="description" content="Rape your enemies">
+        <meta name="theme-color" content="#5959B0">
+        <meta name="description" content="CAuth - Secure Authentication">
 		<link rel="preload" as="font" href="https://fonts.gstatic.com/s/materialicons/v121/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2" type="font/woff2" crossorigin>
 		<link rel="preload" as="font" href="https://fonts.gstatic.com/s/oswald/v40/TK3iWkUHHAIjg752FD8Ghe4.woff2" type="font/woff2" crossorigin>
 		<link rel="stylesheet" href="/style/global.css" media="screen">
