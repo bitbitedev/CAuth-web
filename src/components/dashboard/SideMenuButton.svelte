@@ -24,4 +24,4 @@ a {
     }
 }
 </style>
-<a href={href} title={title}><i class="material-icons">{icon}</i> {title}</a>
+<a {href} {title}><i class="material-icons">{icon}</i> {title}</a>

@@ -2,12 +2,69 @@
 	import { loggedIn } from "../stores/general"
 	export let page
 </script>
+<style lang="scss">
+	header {
+		background-color: var(--color-background-primary);
+		border-bottom: 2px solid var(--color-theme-primary);
+		padding: 10px;
+		top: 0px;
+		width: 100%;
+		z-index: 10000;
+		> .content {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			> a {
+				padding: 10px;
+				text-decoration: none;
+				color: var(--color-foreground-primary);
+				&:hover {
+					text-decoration: none;
+				}
+				> * {
+					display: inline-block;
+					vertical-align: middle;
+				}
+				> img {
+					height: 25px;
+				}
+				> span {
+					margin-left: 10px;
+				}
+			}
+		}
+		menu {
+			padding-inline-start: 0;
+			a {
+				color: inherit;
+				font-size: 14px;
+				padding: 10px 20px;
+				text-decoration: none;
+				color: var(--color-foreground-secondary);
+				&:visited {
+					color: var(--color-foreground-secondary);
+				}
+				&:hover{
+					transition: color .2s;
+					color: var(--color-theme-primary);
+					text-decoration: none;
+				}
+				&[selected="true"] {
+					color: var(--color-theme-primary);
+				}
+				.material-icons {
+					vertical-align: middle;
+				}
+			}
+		}
+	}
+</style>
 <svelte:head>
-{#if page.length > 1}
-	<title>CAuth &there4; {page}</title>
-{:else}
-	<title>CAuth &there4; Home</title>
-{/if}
+	{#if page.length > 1}
+		<title>CAuth &there4; {page}</title>
+	{:else}
+		<title>CAuth &there4; Home</title>
+	{/if}
 </svelte:head>
 <header>
     <div class="content">
@@ -26,60 +83,3 @@
         </menu>
     </div>
 </header>
-<style lang="scss">
-header {
-	background-color: var(--color-background-primary);
-	border-bottom: 2px solid var(--color-theme-primary);
-	padding: 10px;
-	top: 0px;
-	width: 100%;
-	z-index: 10000;
-    > .content {
-        display: flex;
-        justify-content: space-between;
-		align-items: center;
-        > a {
-            padding: 10px;
-            text-decoration: none;
-            color: var(--color-foreground-primary);
-			&:hover {
-				text-decoration: none;
-			}
-			> * {
-				display: inline-block;
-				vertical-align: middle;
-			}
-			> img {
-				height: 25px;
-			}
-            > span {
-                margin-left: 10px;
-            }
-        }
-    }
-    menu {
-		padding-inline-start: 0;
-		a {
-			color: inherit;
-			font-size: 14px;
-			padding: 10px 20px;
-			text-decoration: none;
-			color: var(--color-foreground-secondary);
-			&:visited {
-				color: var(--color-foreground-secondary);
-			}
-			&:hover{
-				transition: color .2s;
-				color: var(--color-theme-primary);
-				text-decoration: none;
-			}
-			&[selected="true"] {
-				color: var(--color-theme-primary);
-			}
-			.material-icons {
-				vertical-align: middle;
-			}
-		}
-	}
-}
-</style>

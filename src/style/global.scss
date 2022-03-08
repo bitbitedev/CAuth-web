@@ -114,20 +114,6 @@ main {
 		margin: 0;
 	}
 }
-footer {
-	width: 100%;
-	padding: 20px;
-	color: var(--color-foreground-secondary);
-
-	.content {
-		font-size: 12px;
-		text-align: center;
-	}
-
-    a {
-        color: inherit;
-    }
-}
 input,textarea,select {
 	background-color: var(--color-background-secondary);
 	border: 1px solid var(--color-input-border);
