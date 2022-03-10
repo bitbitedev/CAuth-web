@@ -1,6 +1,15 @@
 <script>
 	import { loggedIn } from "../stores/general"
-	export let page
+	import { page } from '$app/stores'
+
+	function ucfirst(string) {
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	}
+	let url = '';
+	$:{
+		let path = ucfirst($page.url.pathname.split("/")[1]);
+		url = path.length>1?path:'Home'
+	}
 </script>
 <style lang="scss">
 	header {
@@ -60,25 +69,21 @@
 	}
 </style>
 <svelte:head>
-	{#if page.length > 1}
-		<title>CAuth &there4; {page}</title>
-	{:else}
-		<title>CAuth &there4; Home</title>
-	{/if}
+	<title>CAuth &there4; {url}</title>
 </svelte:head>
 <header>
     <div class="content">
         <a href="/">
-            <img src="/assets/CAuth-logo.svg" alt="CAuth Logo">
+            <img src="/images/CAuth-logo.svg" alt="CAuth Logo">
             <span>C-Auth</span>
         </a>
         <menu>
-            <a href="/about" selected="{page=='About'}">About</a>
+            <a href="/about" selected="{url=='About'}">About</a>
 			{#if $loggedIn}
-            <a href="/dashboard" selected="{page=='Dashboard'}">Dashboard</a>
-            <a href="/logout" selected="{page=='Logout'}" class="error">Logout <i class="material-icons">exit_to_app</i></a>
+            <a href="/dashboard" selected="{url=='Dashboard'}">Dashboard</a>
+            <a href="/logout" selected="{url=='Logout'}" class="error">Logout <i class="material-icons">exit_to_app</i></a>
 			{:else}
-            <a href="/signin" selected="{page=='Signin'}">Sign in <i class="material-icons">account_circle</i></a>
+            <a href="/signin" selected="{url=='Signin'}">Sign in <i class="material-icons">account_circle</i></a>
 			{/if}
         </menu>
     </div>
