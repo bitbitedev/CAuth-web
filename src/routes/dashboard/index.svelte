@@ -1,5 +1,5 @@
 <script>
-    import SideMenuButton from "../dashboard/SideMenuButton.svelte"
+    import SideMenuButton from "../../components/dashboard/SideMenuButton.svelte"
     let menuCollapsed = false;
 </script>
 <style lang="scss">

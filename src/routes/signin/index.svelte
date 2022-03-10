@@ -4,7 +4,7 @@
     let id = Date.now()
     let qrCodeData,qrCode
     $:{
-        qrCodeData = 'https://c-auth.com/login/'+id
+        qrCodeData = 'otpauth://totp/cauth (netcode)?secret=asdfasdfasdfasdfasdf'
         qrCode = 'https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl='+encodeURIComponent(qrCodeData)+'&choe=UTF-8'
     }
 
