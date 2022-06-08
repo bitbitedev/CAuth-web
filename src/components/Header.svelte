@@ -1,16 +1,42 @@
 <script>
-	import { loggedIn } from "../stores/general"
-	import { page } from '$app/stores'
+	import { loggedIn } from '../stores/general';
+	import { page } from '$app/stores';
 
 	function ucfirst(string) {
 		return string.charAt(0).toUpperCase() + string.slice(1);
 	}
 	let url = '';
-	$:{
-		let path = ucfirst($page.url.pathname.split("/")[1]);
-		url = path.length>1?path:'Home'
+	$: {
+		let path = ucfirst($page.url.pathname.split('/')[1]);
+		url = path.length > 1 ? path : 'Home';
 	}
 </script>
+
+<svelte:head>
+	<title>CAuth &there4; {url}</title>
+</svelte:head>
+<header>
+	<div class="content">
+		<a href="/">
+			<img src="/images/CAuth-logo.svg" alt="CAuth Logo" />
+			<span>C-Auth</span>
+		</a>
+		<menu>
+			<a href="/about" selected={url == 'About'}>About</a>
+			{#if $loggedIn}
+				<a href="/dashboard" selected={url == 'Dashboard'}>Dashboard</a>
+				<a href="/logout" selected={url == 'Logout'} class="error"
+					>Logout <i class="material-icons">exit_to_app</i></a
+				>
+			{:else}
+				<a href="/signin" selected={url == 'Signin'}
+					>Sign in <i class="material-icons">account_circle</i></a
+				>
+			{/if}
+		</menu>
+	</div>
+</header>
+
 <style lang="scss">
 	header {
 		background-color: var(--color-background-primary);
@@ -53,12 +79,12 @@
 				&:visited {
 					color: var(--color-foreground-secondary);
 				}
-				&:hover{
-					transition: color .2s;
+				&:hover {
+					transition: color 0.2s;
 					color: var(--color-theme-primary);
 					text-decoration: none;
 				}
-				&[selected="true"] {
+				&[selected='true'] {
 					color: var(--color-theme-primary);
 				}
 				.material-icons {
@@ -68,23 +94,3 @@
 		}
 	}
 </style>
-<svelte:head>
-	<title>CAuth &there4; {url}</title>
-</svelte:head>
-<header>
-    <div class="content">
-        <a href="/">
-            <img src="/images/CAuth-logo.svg" alt="CAuth Logo">
-            <span>C-Auth</span>
-        </a>
-        <menu>
-            <a href="/about" selected="{url=='About'}">About</a>
-			{#if $loggedIn}
-            <a href="/dashboard" selected="{url=='Dashboard'}">Dashboard</a>
-            <a href="/logout" selected="{url=='Logout'}" class="error">Logout <i class="material-icons">exit_to_app</i></a>
-			{:else}
-            <a href="/signin" selected="{url=='Signin'}">Sign in <i class="material-icons">account_circle</i></a>
-			{/if}
-        </menu>
-    </div>
-</header>

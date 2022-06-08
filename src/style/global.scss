@@ -2,7 +2,8 @@
 	font-family: 'Material Icons';
 	font-style: normal;
 	font-weight: 400;
-	src: url(https://fonts.gstatic.com/s/materialicons/v126/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+	src: url(https://fonts.gstatic.com/s/materialicons/v126/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2)
+		format('woff2');
 }
 .material-icons {
 	font-family: 'Material Icons';
@@ -16,7 +17,7 @@
 	white-space: nowrap;
 	word-wrap: normal;
 	direction: ltr;
-	font-feature-settings: "liga";
+	font-feature-settings: 'liga';
 	-webkit-font-feature-settings: 'liga';
 	-webkit-font-smoothing: antialiased;
 }
@@ -31,27 +32,27 @@
 	--color-info-bg: hsl(219, 83%, 79%);
 	--color-warning: hsl(48, 100%, 50%);
 	--color-warning-bg: hsl(48, 89%, 70%);
-	--color-success:hsl(96, 40%, 30%);
+	--color-success: hsl(96, 40%, 30%);
 	--color-success-bg: hsl(96, 40%, 50%);
-	--color-background-primary: #FFF;
-	--color-background-secondary: #E8E8E8;
+	--color-background-primary: #fff;
+	--color-background-secondary: #e8e8e8;
 	--color-foreground-primary: #333;
 	--color-foreground-secondary: #222;
-	--color-theme-primary: #5959B0;
-	--color-theme-primary-light: #7979D0;
+	--color-theme-primary: #5959b0;
+	--color-theme-primary-light: #7979d0;
 	--color-theme-secondary: #2c282c;
 	--color-input-border: #4a474a;
-	--color-background-alternative: #E8E8E8;
+	--color-background-alternative: #e8e8e8;
 
-	@media(prefers-color-scheme: dark){
+	@media (prefers-color-scheme: dark) {
 		--color-background-primary: #333;
 		--color-background-secondary: #222;
-		--color-foreground-primary: #DDD;
-		--color-foreground-secondary: #AAA;
+		--color-foreground-primary: #ddd;
+		--color-foreground-secondary: #aaa;
 		--color-theme-secondary: #2c282c;
 		--color-input-border: #4a474a;
-		--color-theme-primary: #7979D0;
-		--color-theme-primary-light: #5959B0;
+		--color-theme-primary: #7979d0;
+		--color-theme-primary-light: #5959b0;
 		--color-background-alternative: #383838;
 	}
 }
@@ -94,27 +95,34 @@ a {
 	display: inline-block;
 	cursor: pointer;
 
-    &.big {
-        width: 150px;
-	    height: 150px;
-    }
-    &:hover > img {
-        transform: scale(1.2);
-    }
-    > img {
-        width: 100%;
-        height: 100%;
-        transition: transform .4s;
-    }
+	&.big {
+		width: 150px;
+		height: 150px;
+	}
+	&:hover > img {
+		transform: scale(1.2);
+	}
+	> img {
+		width: 100%;
+		height: 100%;
+		transition: transform 0.4s;
+	}
 }
 main {
 	min-height: calc(100vh - 136px);
-	h1,h2,h3,h4,h5,h6{
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
 		font-family: Oswald;
 		margin: 0;
 	}
 }
-input,textarea,select {
+input,
+textarea,
+select {
 	background-color: var(--color-background-secondary);
 	border: 1px solid var(--color-input-border);
 	padding: 5px;
@@ -129,21 +137,21 @@ select {
 	cursor: pointer;
 }
 input {
-	&[type="text"]{
+	&[type='text'] {
 		outline: none;
 	}
-	&[type="submit"]{
+	&[type='submit'] {
 		color: var(--color-foreground-primary);
 		background-color: var(--color-background-secondary);
 		cursor: pointer;
 
 		&:hover {
-			transition: background-color .2s;
+			transition: background-color 0.2s;
 			color: var(--color-theme-primary);
 			background-color: var(--color-background-secondary);
 		}
 	}
-	&[name="sub_code"]{
+	&[name='sub_code'] {
 		width: 234px;
 	}
 }
@@ -156,17 +164,17 @@ input {
 	width: 1200px;
 	margin-left: calc(50% - 600px);
 }
-.h100p{
+.h100p {
 	height: calc(100vh - 137px);
 }
 .center {
 	text-align: center;
 }
-.center-h{
+.center-h {
 	display: flex;
 	justify-content: center;
 }
-.center-v{
+.center-v {
 	display: flex;
 	align-items: center;
 }
@@ -203,7 +211,7 @@ input {
 .error-bg {
 	background-color: var(--color-error-bg);
 }
-code{
+code {
 	color: white;
 	padding: 10px;
 	border-radius: 5px;
@@ -211,9 +219,9 @@ code{
 	font-family: monospace;
 	margin: 5px;
 
-    &.inline{
-        display: inline-block;
-    }
+	&.inline {
+		display: inline-block;
+	}
 }
 blockquote {
 	margin: 0px;
@@ -221,24 +229,24 @@ blockquote {
 	background-color: var(--color-background-secondary);
 	padding: 5px 5px 5px 10px;
 }
-@media(max-width: 1216px){
-	.content{
+@media (max-width: 1216px) {
+	.content {
 		width: 1000px;
 		margin-left: calc(50% - 500px);
 	}
 }
-@media(max-width: 1016px){
-	.content{
+@media (max-width: 1016px) {
+	.content {
 		width: calc(100% - 20px);
 		margin-left: 10px;
 	}
 }
-@media(max-width: 700px){
+@media (max-width: 700px) {
 	header .content menu a {
 		padding: 5px 5px;
 	}
 }
-@media(max-width: 560px){
+@media (max-width: 560px) {
 	header menu a span.logout {
 		display: none;
 	}

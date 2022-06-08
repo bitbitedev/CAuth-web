@@ -1,9 +1,9 @@
 {
-  "short_name": "C-Auth",
-  "name": "C-Auth - Cryptographic Authentication",
-  "start_url": "/",
-  "background_color": "#EEEEEE",
-  "theme_color": "#191970",
-  "display": "standalone",
-  "orientation": "portrait"
+	"short_name": "C-Auth",
+	"name": "C-Auth - Cryptographic Authentication",
+	"start_url": "/",
+	"background_color": "#EEEEEE",
+	"theme_color": "#191970",
+	"display": "standalone",
+	"orientation": "portrait"
 }
