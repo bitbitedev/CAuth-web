@@ -4,7 +4,9 @@
 	let id = Date.now();
 	let qrCodeData, qrCode;
 	$: {
-		qrCodeData = 'otpauth://totp/cauth (netcode)?secret=asdfasdfasdfasdfasdf';
+		let sessid = Math.random()*1000000000 | id;
+		let message = btoa("Login to c-auth.com");
+		qrCodeData = `cauth://cauth/${sessid}/${message}`;
 		qrCode =
 			'https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=' +
 			encodeURIComponent(qrCodeData) +
