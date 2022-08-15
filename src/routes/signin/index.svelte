@@ -4,8 +4,8 @@
 	let id = Date.now();
 	let qrCodeData, qrCode;
 	$: {
-		let sessid = Math.random()*1000000000 | id;
-		let message = btoa("Login to c-auth.com");
+		let sessid = (Math.random() * 1000000000) | id;
+		let message = btoa('Login to c-auth.com');
 		qrCodeData = `cauth://cauth/${sessid}/${message}`;
 		qrCode =
 			'https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=' +
