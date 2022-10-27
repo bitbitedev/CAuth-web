@@ -39,7 +39,7 @@
 
 <style lang="scss">
 	header {
-		background-color: var(--color-background-primary);
+		background-color: var(--color-background-secondary);
 		border-bottom: 2px solid var(--color-theme-primary);
 		padding: 10px;
 		top: 0px;
