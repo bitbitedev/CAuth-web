@@ -6,6 +6,8 @@
 			Since your data is stored on your own device instead of in the cloud, you need to download an
 			app.
 		</div>
+		<!-- move wherever you want to have it, as well as format it to your needs / wishes -->
+		<span>Not a private user? Check out our platform <a href="/registration">registration</a>!</span>
 	</div>
 </div>
 
