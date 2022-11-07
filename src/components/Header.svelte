@@ -23,6 +23,7 @@
 		</a>
 		<menu>
 			<a href="/about" selected={url == 'About'}>About</a>
+			<a href="/platforms" selected={url == 'Platforms'}>Platforms</a>
 			{#if $loggedIn}
 				<a href="/dashboard" selected={url == 'Dashboard'}>Dashboard</a>
 				<a href="/logout" selected={url == 'Logout'} class="error"

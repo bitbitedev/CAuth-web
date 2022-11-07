@@ -17,7 +17,7 @@
 			>krebsonsecurity, 2019</a
 		>. <br />
 		<br />
-		At C-Auth, we believe that security must always be a priority. That is why we firmly believe that
+		At C-Auth, we believe that security must always be priority. That is why we firmly believe that
 		such cases of published passwords should no longer exist. Furthermore, it is not the platforms that
 		should have control over personal data, but the users. For this purpose, we are developing C-Auth.
 		We have set ourselves goals that we want to achieve when using C-Auth:<br />
