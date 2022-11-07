@@ -1,18 +1,8 @@
 <script>
-	import Private from '$components/platform/registration/Private.svelte';
-	import Organization from '$components/platform/registration/Organization.svelte';
+	import Private from '$components/platforms/registration/Private.svelte';
+	import Organization from '$components/platforms/registration/Organization.svelte';
 
-	let value = '';
-
-	function loadForm() {
-		if(value == 'organization') {
-			let domElement = Document.getElementById('tbody');
-			domElement.insertAdjacentHTML('beforeend', '<tr><td> some text test </td></tr>');
-		} else if(value == 'private') {
-			let domElement = Document.getElementById('tbody');
-			domElement.insertAdjacentHTML('beforeend', '<tr><td> some more text test </td></tr>');
-		}
-	}
+	let value = 'organization';
 
 	function doSomething() {}
 </script>
@@ -28,8 +18,8 @@
 						I am
 					</td>
 					<td>
-						<select on:change={() => loadForm()}>
-							<option default value="organization">an organization.</option>
+						<select bind:value={value}>
+							<option value="organization">an organization.</option>
 							<option value="private">a private person.</option>
 						</select>
 					</td>
