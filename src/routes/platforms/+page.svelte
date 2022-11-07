@@ -25,7 +25,7 @@
 			</p>
 		</div>
 	</div>
-	<span>Like what you see? Start by taking a look on the <a href="link_to_doc">docs</a> or just <a href="getting-started">get started!</a></span>
+	<span>Like what you see? Start by taking a look on the <a href="link_to_doc">docs</a> or just <a href="/platforms/registration">get started!</a></span>
 </div>
 
 

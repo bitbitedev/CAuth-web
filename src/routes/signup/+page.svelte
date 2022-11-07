@@ -7,7 +7,7 @@
 			app.
 		</div>
 		<!-- move wherever you want to have it, as well as format it to your needs / wishes -->
-		<span>Not a private user? Check out our platform <a href="/registration">registration</a>!</span>
+		<span>Not a private user? Check out our platform <a href="/platforms">registration</a>!</span>
 	</div>
 </div>
 
