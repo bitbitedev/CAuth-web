@@ -8,11 +8,10 @@
 </script>
 
 
-<div id="getting-started">
-	Please fill in the form. <!-- or some other garbage text, if needed -->
+<div class="content">
 	<form on:submit={doSomething}>
 		<table>
-			<tbody id="tbody">
+			<tbody>
 				<tr>
 					<td>
 						I am
