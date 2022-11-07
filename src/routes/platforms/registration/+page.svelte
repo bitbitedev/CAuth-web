@@ -1,6 +1,6 @@
 <script>
-	import Private from '../components/platform/registration/Private.svelte';
-	import Organization from '../components/platform/registration/Organization.svelte';
+	import Private from '$components/platform/registration/Private.svelte';
+	import Organization from '$components/platform/registration/Organization.svelte';
 
 	let value = '';
 
