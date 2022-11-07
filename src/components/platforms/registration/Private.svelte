@@ -12,9 +12,6 @@
 
 
 <tr>
-	<th>Please fill in the form.</th>
-</tr>
-<tr>
 	<td>
 		Your Name:
 	</td>
