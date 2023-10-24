@@ -8,6 +8,7 @@ export const handle = async ({ event, resolve }) => {
 				event.cookies.delete('token');
 			} else {
 				event.locals.db = db;
+				event.locals.loggedIn = true;
 			}
 		} catch (e) {
 			event.cookies.delete('token');

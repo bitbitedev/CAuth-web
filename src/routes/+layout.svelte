@@ -26,14 +26,14 @@
 			<span class="w-max whitespace-nowrap">C-Auth</span>
 		</a>
 	</div>
-	<menu class="flex-none gap-5 mr-5">
+	<menu class="flex-none gap-4 mr-5">
 		<a href="/about" class="hover:text-primary" selected={url == 'About'}>About</a>
 		<a href="/platforms" class="hover:text-primary" selected={url == 'Platforms'}>Platforms</a>
 		{#if data.loggedIn}
-			<a href="/dashboard" class="hover:text-primary" selected={url == 'Dashboard'}>Dashboard</a>
+			<a href="/my" class="hover:text-primary" selected={url == 'Dashboard'}>Dashboard</a>
 			<a
 				href="/logout"
-				class="hover:text-primary error"
+				class="hover:text-primary text-error flex items-center gap-1"
 				selected={url == 'Logout'}
 				data-sveltekit-preload-data="tap">
 				Logout <Logout />
