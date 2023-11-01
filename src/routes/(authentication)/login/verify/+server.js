@@ -41,12 +41,17 @@ export async function POST({ request }) {
 			authenticator
 		});
 	} catch (error) {
-		console.error(error);
+		await rootDB.merge(`authRequest:${authReq}`, {
+			status: 'failed'
+		});
 		return json({ status: 'error', error: error.message });
 	}
 	if (verification.verified) {
 		await rootDB.merge(authenticator.id, {
 			counter: verification.authenticationInfo.newCounter
+		});
+		await rootDB.merge(`authRequest:${authReq}`, {
+			status: 'verified'
 		});
 	}
 	const response = {

@@ -27,8 +27,6 @@
 		</a>
 	</div>
 	<menu class="flex-none gap-4 mr-5">
-		<a href="/about" class="hover:text-primary" selected={url == 'About'}>About</a>
-		<a href="/platforms" class="hover:text-primary" selected={url == 'Platforms'}>Platforms</a>
 		{#if data.loggedIn}
 			<a href="/my" class="hover:text-primary" selected={url == 'Dashboard'}>Dashboard</a>
 			<a
@@ -39,6 +37,8 @@
 				Logout <Logout />
 			</a>
 		{:else}
+			<a href="/about" class="hover:text-primary" selected={url == 'About'}>About</a>
+			<a href="/platforms" class="hover:text-primary" selected={url == 'Platforms'}>Platforms</a>
 			<a
 				href="/login"
 				class="hover:text-primary flex items-center gap-1"

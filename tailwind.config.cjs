@@ -9,13 +9,15 @@ const config = {
 			{
 				light: {
 					...require('daisyui/src/theming/themes')['[data-theme=light]'],
-					primary: '#5959b0'
+					primary: '#5959b0',
+					warning: '#ff8c00'
 				}
 			},
 			{
 				dark: {
 					...require('daisyui/src/theming/themes')['[data-theme=dark]'],
-					primary: '#5959b0'
+					primary: '#5959b0',
+					warning: '#ff8c00'
 				}
 			},
 			'night'
