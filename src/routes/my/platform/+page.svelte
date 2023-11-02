@@ -20,6 +20,9 @@
         <div class="card-title">
             Platforms
         </div>
+        <p>
+            If you are a developer and want to use our authentication service, you can register your platform here.
+        </p>
         <div>
             <table>
                 <thead>

@@ -1,11 +1,17 @@
+<script>
+    export let data;
+</script>
+
 <div id="content">
     <menu>
         <a href="/my/profile">Profile</a>
         <a href="/my/activities">Activities</a>
         <a href="/my/history">Access history</a>
         <a href="/my/settings">Settings</a>
-        <div class="divider"></div>
-        <a href="/my/platform">My Platforms</a>
+        {#if data.settings?.developermode}
+            <div class="divider"></div>
+            <a href="/my/platform">My Platforms</a>
+        {/if}
     </menu>
     <main>
         <slot/>

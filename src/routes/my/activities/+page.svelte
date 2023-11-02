@@ -2,7 +2,6 @@
     import { Pagination } from '$lib/components';
 
     export let data;
-    console.log(data);
 </script>
 
 <div class="card bg-base-100">
