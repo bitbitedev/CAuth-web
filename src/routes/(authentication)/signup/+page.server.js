@@ -11,7 +11,7 @@ const signup = async ({ request }) => {
 		Object.prototype.hasOwnProperty.call(body, 'username') &&
 		Object.prototype.hasOwnProperty.call(body, 'email')
 	) {
-		let user = await rootDB.query('SELECT id FROM user WHERE name = $name OR email = $email', {
+		let user = await rootDB.query('SELECT id FROM user WHERE id = type::thing("user",$name) OR email = $email', {
 			name: body.username,
 			email: body.email
 		});

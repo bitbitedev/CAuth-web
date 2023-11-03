@@ -15,13 +15,7 @@ export const load = async ({ url }) => {
 const login = async ({ request, url }) => {
 	let body = Object.fromEntries(await request.formData());
 	if (Object.prototype.hasOwnProperty.call(body, 'username')) {
-		let user = await rootDB.query('SELECT id FROM user WHERE name = $username', {
-			username: body.username
-		});
-		if (user[0].status !== 'OK' || !Array.isArray(user[0].result)) {
-			throw error(500, { message: 'Error reading data' });
-		}
-		user = user[0].result[0];
+		let [ user ] = await rootDB.select(`user:${body.username}`);
 		if (user === undefined) {
 			throw error(500, { message: 'User not found' });
 		}
