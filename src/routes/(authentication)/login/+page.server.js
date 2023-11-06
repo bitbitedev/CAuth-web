@@ -76,7 +76,7 @@ const verify = async ({ request, cookies, url }) => {
 			assertResponse
 		});
 	} catch (err) {
-		await rootDB.merge(`authRequest:${authReq}`, {
+		rootDB.merge(`authRequest:${authReq}`, {
 			status: 'failed'
 		});
 		throw error(500, { message: 'Login failed' });
@@ -84,7 +84,7 @@ const verify = async ({ request, cookies, url }) => {
 
 	const platform = await getPlatformByName(url.searchParams.get('ref'));
 	if(platform){
-		throw redirect(302, `${platform.returnUrl}?token=${authReq}`);
+		throw redirect(302, `${platform.returnUrl}?session=${authReq}`);
 	}
 
 	cookies.set('token', token);
