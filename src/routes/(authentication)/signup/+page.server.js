@@ -11,10 +11,13 @@ const signup = async ({ request }) => {
 		Object.prototype.hasOwnProperty.call(body, 'username') &&
 		Object.prototype.hasOwnProperty.call(body, 'email')
 	) {
-		let user = await rootDB.query('SELECT id FROM user WHERE id = type::thing("user",$name) OR email = $email', {
-			name: body.username,
-			email: body.email
-		});
+		let user = await rootDB.query(
+			'SELECT id FROM user WHERE id = type::thing("user",$name) OR email = $email',
+			{
+				name: body.username,
+				email: body.email
+			}
+		);
 		if (user[0].status !== 'OK' || !Array.isArray(user[0].result)) {
 			throw error(500, { message: 'Error reading data' });
 		}

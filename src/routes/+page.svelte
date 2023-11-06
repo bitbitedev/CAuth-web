@@ -32,7 +32,7 @@
 				<h2>Security</h2>
 				<span>
 					The data users provide should <b>always</b>
-					 be secure. No unauthorized instance should ever be able to obtain any of their data.
+					be secure. No unauthorized instance should ever be able to obtain any of their data.
 				</span>
 			</div>
 			<div class="goal">
@@ -40,7 +40,7 @@
 				<h2>Usability</h2>
 				<span>
 					Any tool related to C-Auth should be <b>easy to use</b>
-					 for anyone, also for people without technical knowledge.
+					for anyone, also for people without technical knowledge.
 				</span>
 			</div>
 			<div class="goal">

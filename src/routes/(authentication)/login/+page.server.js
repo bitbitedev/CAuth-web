@@ -6,7 +6,7 @@ import { error, redirect } from '@sveltejs/kit';
 
 export const load = async ({ url }) => {
 	const platform = getPlatformByName(url.searchParams.get('ref'));
-	if(platform)
+	if (platform)
 		return {
 			platform
 		};
@@ -15,7 +15,7 @@ export const load = async ({ url }) => {
 const login = async ({ request, url }) => {
 	let body = Object.fromEntries(await request.formData());
 	if (Object.prototype.hasOwnProperty.call(body, 'username')) {
-		let [ user ] = await rootDB.select(`user:${body.username}`);
+		let [user] = await rootDB.select(`user:${body.username}`);
 		if (user === undefined) {
 			throw error(500, { message: 'User not found' });
 		}
@@ -46,8 +46,7 @@ const login = async ({ request, url }) => {
 				username: body.username
 			}
 		};
-		if(platform)
-			authReqData.platform = platform.id;
+		if (platform) authReqData.platform = platform.id;
 		const authReq = await rootDB.create('authRequest', authReqData);
 		return { options, authReq: authReq[0].id.split(':')[1] };
 	}
@@ -83,12 +82,12 @@ const verify = async ({ request, cookies, url }) => {
 	}
 
 	const platform = await getPlatformByName(url.searchParams.get('ref'));
-	if(platform){
+	if (platform) {
 		throw redirect(302, `${platform.returnUrl}?session=${authReq}`);
 	}
 
 	cookies.set('token', token);
-	
+
 	throw redirect(302, '/my');
 };
 
@@ -98,9 +97,9 @@ export const actions = {
 };
 
 const getPlatformByName = async (name) => {
-	if(name !== null && name.length === 0)
+	if (name !== null && name.length === 0)
 		throw error(400, { message: 'Invalid request. Specify referrer or remove the ref parameter' });
-	else if(name){
+	else if (name) {
 		const platform = await rootDB.query('SELECT * FROM platform WHERE name = $name', {
 			name: name
 		});
@@ -113,6 +112,5 @@ const getPlatformByName = async (name) => {
 		}
 
 		return platformData[0];
-	}
-	else return undefined;
+	} else return undefined;
 };
