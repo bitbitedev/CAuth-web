@@ -33,6 +33,7 @@ const signup = async ({ request }) => {
 			challenge: options.challenge,
 			createdAt: new Date(),
 			type: 'signup',
+			status: 'pending',
 			userData: {
 				username: body.username,
 				email: body.email
@@ -57,12 +58,17 @@ const verify = async ({ request, cookies }) => {
 			expectedRPID: RP_ID
 		});
 	} catch (err) {
-		console.error(err);
+		rootDB.merge(`authRequest:${id}`, {
+			status: 'failed'
+		});
 		throw error(500, { message: 'Error verifying registration' });
 	}
 	const { verified, registrationInfo } = verification;
 	const { credentialPublicKey, credentialID, counter } = registrationInfo;
 	if (!verified) {
+		rootDB.merge(`authRequest:${id}`, {
+			status: 'failed'
+		});
 		throw error(500, { message: 'Error verifying registration' });
 	}
 	try {
@@ -79,7 +85,13 @@ const verify = async ({ request, cookies }) => {
 		});
 		await db.delete(authReq[0].id);
 		cookies.set('token', token);
+		rootDB.merge(`authRequest:${id}`, {
+			status: 'verified'
+		});
 	} catch (err) {
+		rootDB.merge(`authRequest:${id}`, {
+			status: 'failed'
+		});
 		throw error(500, { message: 'Signup failed' });
 	}
 	throw redirect(302, '/my');
