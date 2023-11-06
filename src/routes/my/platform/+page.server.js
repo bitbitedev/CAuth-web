@@ -30,7 +30,7 @@ const create = async ({ request, locals }) => {
         url: formData.url,
         returnUrl: formData.returnUrl
     });
-    throw redirect(307, '/my/platform');
+    throw redirect(302, '/my/platform');
 }
 
 export const actions = {
