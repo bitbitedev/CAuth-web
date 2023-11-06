@@ -1,6 +1,7 @@
 <script>
     import { Input } from '$lib/components';
     import { validatePlatformDescription, validatePlatformName, validatePlatformUrl } from '$lib/utils/index.js';
+    import ShieldLock from 'svelte-material-icons/ShieldLock.svelte';
 
     export let data;
 
@@ -31,6 +32,7 @@
                         <td>description</td>
                         <td>url</td>
                         <td>return url</td>
+                        <td></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,6 +42,7 @@
                             <td>{platform.description}</td>
                             <td>{platform.url}</td>
                             <td>{platform.returnUrl}</td>
+                            <td><a href="/my/platform/{platform.id.split(':')[1]}" class="btn btn-primary btn-md btn-circle text-2xl"><ShieldLock /></a></td>
                         </tr>
                     {/each}
                 </tbody>
