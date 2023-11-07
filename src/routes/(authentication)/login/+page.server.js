@@ -64,9 +64,10 @@ const verify = async ({ request, cookies, url }) => {
 		throw error(500, { message: 'Invalid request' });
 	}
 
+	const _db = db();
 	let token;
 	try {
-		token = await db.signin({
+		token = await _db.signin({
 			NS: DB_NAMESPACE,
 			DB: DB_DATABASE,
 			SC: 'user',

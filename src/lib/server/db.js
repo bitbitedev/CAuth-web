@@ -16,7 +16,7 @@ const getDatabase = () => {
  * local database connection
  * use `import { db } from '$lib/server/db';` to import the database connection
  */
-export const db = getDatabase();
+export const db = getDatabase;
 
 const getRootDatabase = () => {
 	const db = getDatabase();

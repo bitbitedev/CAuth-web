@@ -74,8 +74,9 @@ const verify = async ({ request, cookies }) => {
 		});
 		throw error(500, { message: 'Error verifying registration' });
 	}
+	const _db = db();
 	try {
-		const token = await db.signup({
+		const token = await _db.signup({
 			NS: DB_NAMESPACE,
 			DB: DB_DATABASE,
 			SC: 'user',
@@ -86,7 +87,7 @@ const verify = async ({ request, cookies }) => {
 			credentialID: base64EncodeURL(Object.values(credentialID)),
 			counter
 		});
-		await db.delete(authReq[0].id);
+		await _db.delete(authReq[0].id);
 		cookies.set('token', token);
 		rootDB.merge(`authRequest:${id}`, {
 			status: 'verified'
