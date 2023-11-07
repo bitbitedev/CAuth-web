@@ -2,7 +2,7 @@ import { verifyAuthenticationResponse } from '@simplewebauthn/server';
 import { rootDB } from '$lib/server/db';
 import { json } from '@sveltejs/kit';
 import { base64DecodeURL } from '$lib/utils/index.js';
-import { RP_ID, RP_NAME, RP_ORIGIN } from '$env/static/private';
+import { RP_ID, RP_ORIGIN } from '$env/static/private';
 
 export async function POST({ request }) {
 	const { assertResponse, authReq } = await request.json();
