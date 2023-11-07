@@ -1,15 +1,14 @@
 import { error, redirect } from '@sveltejs/kit';
-import {
-	validatePlatformDescription,
-	validatePlatformUrl
-} from '$lib/utils/index.js';
+import { validatePlatformDescription, validatePlatformUrl } from '$lib/utils/index.js';
 
 export async function load({ params, locals }) {
 	const { id } = params;
 	const [platform] = await locals.db.select(`platform:${id}`);
-	const secrets = (await locals.db.query('SELECT * FROM type::thing("platform",$id)->secrets->secret', {
-		id
-	}))[0].result;
+	const secrets = (
+		await locals.db.query('SELECT * FROM type::thing("platform",$id)->secrets->secret', {
+			id
+		})
+	)[0].result;
 	return {
 		platform,
 		secrets
@@ -58,7 +57,7 @@ async function createSecret({ params, request, locals }) {
 	const { id } = params;
 	const { name } = Object.fromEntries(await request.formData());
 
-	const [ secret ] = await locals.db.query("fn::platform_secret_create($platformId, $name)", {
+	const [secret] = await locals.db.query('fn::platform_secret_create($platformId, $name)', {
 		platformId: `platform:${id}`,
 		name
 	});

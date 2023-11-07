@@ -14,10 +14,10 @@ export async function POST({ request }) {
 		secret
 	});
 	const tokenData = parseJwt(token);
-	const expires = new Date(tokenData.exp*1000);
+	const expires = new Date(tokenData.exp * 1000);
 	return json({ token, expires });
 }
 
-function parseJwt (token) {
-    return JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
+function parseJwt(token) {
+	return JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
 }
