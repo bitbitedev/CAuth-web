@@ -5,7 +5,7 @@
 
 	export let data;
 
-	let username = 'netcode';
+	let username = '';
 	let error = '';
 	let disabled = false;
 

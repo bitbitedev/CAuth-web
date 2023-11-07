@@ -4,8 +4,8 @@
 	import { startRegistration } from '@simplewebauthn/browser';
 
 	let error = '';
-	let name = 'netcode';
-	let email = 'benmondini@netcode.dev';
+	let name = '';
+	let email = '';
 	let disabled = true;
 
 	$: disabled = name.length < 2 || email.length < 6;
