@@ -1,0 +1,20 @@
+/* Write your global styles here, in PostCSS syntax */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	@apply bg-base-300;
+}
+
+table {
+	@apply table;
+	@apply table-zebra;
+	@apply table-md;
+	@apply rounded-xl;
+
+	thead {
+		@apply bg-base-300;
+		@apply uppercase;
+	}
+}
