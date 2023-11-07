@@ -28,6 +28,6 @@ jobs:
       - name: Install surrealdb
         run: curl -sSf https://install.surrealdb.com | sh
       - name: Start Database
-        run: surreal start --user root --pass pass -A --auth memory
+        run: screen -AmdS surreal surreal start --user root --pass pass -A --auth memory
       - run: npm ci
       - run: npm run build --if-present
