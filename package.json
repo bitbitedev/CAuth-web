@@ -29,7 +29,7 @@
 	"type": "module",
 	"dependencies": {
 		"@simplewebauthn/browser": "^8.3.1",
-		"@simplewebauthn/server": "^8.3.2",
+		"@simplewebauthn/server": "^8.3.5",
 		"surrealdb.js": "^0.9.1",
 		"svelte-material-icons": "^3.0.5"
 	}
