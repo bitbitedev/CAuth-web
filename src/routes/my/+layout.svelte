@@ -4,13 +4,13 @@
 
 <div id="content">
 	<menu>
-		<a href="/my">Profile</a>
-		<a href="/my/activities">Activities</a>
+		<a href="/my" class="btn mt-1">Profile</a>
+		<a href="/my/activities" class="btn mt-1">Activities</a>
 		<!-- <a href="/my/history">Access history</a> -->
-		<a href="/my/settings">Settings</a>
+		<a href="/my/settings" class="btn mt-1">Settings</a>
 		{#if data.settings?.developermode}
 			<div class="divider" />
-			<a href="/my/platform">My Platforms</a>
+			<a href="/my/platform" class="btn mt-1">My Platforms</a>
 		{/if}
 	</menu>
 	<main>
@@ -29,10 +29,6 @@
 			@apply p-4;
 			display: flex;
 			flex-direction: column;
-			a {
-				@apply btn;
-				@apply mt-1;
-			}
 		}
 		main {
 			@apply p-4;
