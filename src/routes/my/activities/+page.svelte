@@ -12,7 +12,7 @@
 			<thead>
 				<tr>
 					<td>platform</td>
-					<td width="100">type</td>
+					<td width="200">type</td>
 					<td width="100">status</td>
 					<td width="200">date</td>
 				</tr>

@@ -6,7 +6,7 @@
 	<menu>
 		<a href="/my">Profile</a>
 		<a href="/my/activities">Activities</a>
-		<a href="/my/history">Access history</a>
+		<!-- <a href="/my/history">Access history</a> -->
 		<a href="/my/settings">Settings</a>
 		{#if data.settings?.developermode}
 			<div class="divider" />
