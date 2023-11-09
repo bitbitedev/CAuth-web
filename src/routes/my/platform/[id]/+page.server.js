@@ -61,7 +61,7 @@ async function createSecret({ params, request, locals }) {
 	return {
 		success: true,
 		message: 'Platform secret updated successfully',
-		secret: secret.result
+		secret
 	};
 }
 

@@ -29,7 +29,6 @@
 
 	const applyFormData = () => {
 		return async ({ result }) => {
-			console.log(result);
 			description = result.data.formData.description;
 			url = result.data.formData.url;
 			returnUrl = result.data.formData.returnUrl;

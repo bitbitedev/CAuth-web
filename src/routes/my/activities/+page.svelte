@@ -11,7 +11,8 @@
 		<table>
 			<thead>
 				<tr>
-					<td>platform</td>
+					<td width="300">platform</td>
+					<td>used authenticator</td>
 					<td width="200">type</td>
 					<td width="100">status</td>
 					<td width="200">date</td>
@@ -21,6 +22,7 @@
 				{#each data.authReqs as authReq}
 					<tr>
 						<td>{authReq.platform?.name ?? 'C-Auth'}</td>
+						<td>{authReq.authenticator?.name ?? 'Unknown'}</td>
 						<td>{authReq.type}</td>
 						<td
 							class:text-error={authReq.status == 'failed'}

@@ -51,7 +51,8 @@ export async function POST({ request }) {
 			counter: verification.authenticationInfo.newCounter
 		});
 		await rootDB.merge(`authRequest:${authReq}`, {
-			status: 'verified'
+			status: 'verified',
+			authenticator: authenticator.id
 		});
 	}
 	const response = {

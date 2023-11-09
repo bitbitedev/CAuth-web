@@ -7,12 +7,12 @@ export async function load({ locals, url }) {
 		const authReqsCount = (await locals.db.query('SELECT count() as count FROM authRequest GROUP ALL'))[0][0].count;
 
 		const [ authReqs ] = await locals.db.query(
-			'SELECT * FROM authRequest ORDER BY createdAt DESC LIMIT 10 START $offset FETCH platform',
+			'SELECT * FROM authRequest ORDER BY createdAt DESC LIMIT 10 START $offset FETCH platform, authenticator',
 			{ offset }
 		);
 		return {
 			authReqs: authReqs,
-			pageCount: Math.ceil(authReqsCount?.count / 10),
+			pageCount: Math.ceil((authReqsCount ?? 1) / 10),
 			pageIndex: Math.max(1, Number(url.searchParams.get('page') ?? 1))
 		};
 	}
