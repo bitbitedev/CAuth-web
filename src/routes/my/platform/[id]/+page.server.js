@@ -4,11 +4,7 @@ import { validatePlatformDescription, validatePlatformUrl } from '$lib/utils/ind
 export async function load({ params, locals }) {
 	const { id } = params;
 	const [platform] = await locals.db.select(`platform:${id}`);
-	const secrets = (
-		await locals.db.query('SELECT * FROM type::thing("platform",$id)->secrets->secret', {
-			id
-		})
-	)[0].result;
+	const [ secrets ] = await locals.db.query('SELECT * FROM type::thing("platform",$id)->secrets->secret', { id });
 	return {
 		platform,
 		secrets
@@ -57,7 +53,7 @@ async function createSecret({ params, request, locals }) {
 	const { id } = params;
 	const { name } = Object.fromEntries(await request.formData());
 
-	const [secret] = await locals.db.query('fn::platform_secret_create($platformId, $name)', {
+	const [ secret ] = await locals.db.query('fn::platform_secret_create($platformId, $name)', {
 		platformId: `platform:${id}`,
 		name
 	});
@@ -65,7 +61,7 @@ async function createSecret({ params, request, locals }) {
 	return {
 		success: true,
 		message: 'Platform secret updated successfully',
-		secret: secret.result
+		secret
 	};
 }
 

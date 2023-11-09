@@ -117,7 +117,6 @@ async function verify({ request, cookies }) {
 			credentialID: base64EncodeURL(Object.values(credentialID)),
             counter
         });
-        console.log(res);
 		rootDB.merge(`authRequest:${id}`, {
 			status: 'verified'
 		});

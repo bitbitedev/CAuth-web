@@ -11,17 +11,17 @@ const signup = async ({ request }) => {
 		Object.prototype.hasOwnProperty.call(body, 'username') &&
 		Object.prototype.hasOwnProperty.call(body, 'email')
 	) {
-		let user = await rootDB.query(
+		let [ user ] = await rootDB.query(
 			'SELECT id FROM user WHERE id = type::thing("user",$name) OR email = $email',
 			{
 				name: body.username,
 				email: body.email
 			}
 		);
-		if (user[0].status !== 'OK' || !Array.isArray(user[0].result)) {
+		if (!Array.isArray(user)) {
 			throw error(500, { message: 'Error reading data' });
 		}
-		user = user[0].result[0];
+		user = user[0];
 		if (user !== undefined) {
 			throw error(500, { message: 'Username or email is already in use' });
 		}
@@ -87,12 +87,16 @@ const verify = async ({ request, cookies }) => {
 			credentialID: base64EncodeURL(Object.values(credentialID)),
 			counter
 		});
-		await _db.delete(authReq[0].id);
+		const [[authenticator]] = await _db.query('SELECT VALUE id FROM authenticator WHERE credentialID = $credentialID', {
+			credentialID: base64EncodeURL(Object.values(credentialID))
+		});
 		cookies.set('token', token);
 		rootDB.merge(`authRequest:${id}`, {
-			status: 'verified'
+			status: 'verified',
+			authenticator: authenticator
 		});
 	} catch (err) {
+		console.log(err);
 		rootDB.merge(`authRequest:${id}`, {
 			status: 'failed'
 		});

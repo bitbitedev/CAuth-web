@@ -6,11 +6,10 @@ import {
 } from '$lib/utils/index.js';
 
 export const load = async ({ locals }) => {
-	const platforms = await locals.db.query('SELECT * FROM $auth->platforms->platform');
-	if (platforms[0].status == 'OK')
-		return {
-			platforms: platforms[0].result
-		};
+	const [ platforms ] = await locals.db.query('SELECT * FROM $auth->platforms->platform');
+	return {
+		platforms
+	};
 };
 
 const create = async ({ request, locals }) => {
