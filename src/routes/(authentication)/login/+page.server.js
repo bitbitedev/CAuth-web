@@ -25,10 +25,10 @@ const login = async ({ request, url }) => {
 				user: user.id.split(':')[1]
 			}
 		);
-		if (authenticators[0].status !== 'OK' || !Array.isArray(authenticators[0].result)) {
+		if (!Array.isArray(authenticators[0])) {
 			throw error(500, { message: 'Error reading data' });
 		}
-		authenticators = authenticators[0].result;
+		authenticators = authenticators[0];
 		const options = await generateAuthenticationOptions({
 			allowCredentials: authenticators.map((authenticator) => ({
 				id: base64DecodeURL(authenticator.credentialID),
@@ -47,8 +47,8 @@ const login = async ({ request, url }) => {
 			}
 		};
 		if (platform) authReqData.platform = platform.id;
-		const authReq = await rootDB.create('authRequest', authReqData);
-		return { options, authReq: authReq[0].id.split(':')[1] };
+		const [ authReq ] = await rootDB.create('authRequest', authReqData);
+		return { options, authReq: authReq.id.split(':')[1] };
 	}
 	throw error(500, { error: 'invalid request' });
 };
@@ -76,6 +76,7 @@ const verify = async ({ request, cookies, url }) => {
 			assertResponse
 		});
 	} catch (err) {
+		console.log(err);
 		rootDB.merge(`authRequest:${authReq}`, {
 			status: 'failed'
 		});
