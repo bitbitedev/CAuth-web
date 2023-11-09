@@ -6,9 +6,9 @@ export async function POST({ request }) {
 	let data = await request.json();
 	let { platform, secret } = data;
 	const token = await db().signin({
-		NS: DB_NAMESPACE,
-		DB: DB_DATABASE,
-		SC: 'platform',
+		namespace: DB_NAMESPACE,
+		database: DB_DATABASE,
+		scope: 'platform',
 
 		platform,
 		secret

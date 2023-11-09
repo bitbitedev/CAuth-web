@@ -77,9 +77,9 @@ const verify = async ({ request, cookies }) => {
 	const _db = db();
 	try {
 		const token = await _db.signup({
-			NS: DB_NAMESPACE,
-			DB: DB_DATABASE,
-			SC: 'user',
+			namespace: DB_NAMESPACE,
+			database: DB_DATABASE,
+			scope: 'user',
 
 			name: authReq[0].userData.username,
 			email: authReq[0].userData.email,

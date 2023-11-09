@@ -21,10 +21,10 @@ export const db = getDatabase;
 const getRootDatabase = () => {
 	const db = getDatabase();
 	db.signin({
-		user: DB_USER,
-		pass: DB_PASSWORD
+		username: DB_USER,
+		password: DB_PASSWORD
 	});
-	db.use({ ns: DB_NAMESPACE, db: DB_DATABASE });
+	db.use({ namespace: DB_NAMESPACE, database: DB_DATABASE });
 	return db;
 };
 

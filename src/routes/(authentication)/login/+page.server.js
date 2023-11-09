@@ -68,9 +68,9 @@ const verify = async ({ request, cookies, url }) => {
 	let token;
 	try {
 		token = await _db.signin({
-			NS: DB_NAMESPACE,
-			DB: DB_DATABASE,
-			SC: 'user',
+			namespace: DB_NAMESPACE,
+			database: DB_DATABASE,
+			scope: 'user',
 
 			authReq,
 			assertResponse
