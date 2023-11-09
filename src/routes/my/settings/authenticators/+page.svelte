@@ -1,5 +1,6 @@
 <script>
     import Edit from 'svelte-material-icons/Pencil.svelte';
+    import Delete from 'svelte-material-icons/Delete.svelte';
     import { Modal, Input } from '$lib/components';
     import { enhance } from '$app/forms';
 
@@ -16,6 +17,9 @@
                     {authenticator.name ?? 'Unknown'}
                     <button class="btn btn-primary btn-circle btn-xs" onclick="modal_edit_{authenticator.id.split(':')[1]}.showModal();">
                         <Edit/>
+                    </button>
+                    <button class="btn btn-error btn-circle btn-xs text-white" onclick="modal_delete_{authenticator.id.split(':')[1]}.showModal();">
+                        <Delete/>
                     </button>
                 </div>
                 <div class="bg-base-200 rounded-xl p-5">
@@ -39,6 +43,18 @@
                         <div class="modal-action">
                             <button class="btn btn-error text-white" on:click|preventDefault onclick="modal_edit_{authenticator.id.split(':')[1]}.close();">Close</button>
                             <button class="btn btn-primary" name="id" value={authenticator.id.split(':')[1]} onclick="modal_edit_{authenticator.id.split(':')[1]}.close();">Confirm</button>
+                        </div>
+                    </form>
+                </Modal>
+                <Modal id="modal_delete_{authenticator.id.split(':')[1]}" title="Delete authenticator">
+                    <p class="mb-1 text-error">
+                        If you delete this authenticator you can no longer login on the device that registered this authenticator.
+                        You can always add a new authenticator <a href="/new-device">here</a>.
+                    </p>
+                    <form action="?/deleteAuthenticator" method="POST" use:enhance>
+                        <div class="modal-action">
+                            <button class="btn text-white" on:click|preventDefault onclick="modal_delete_{authenticator.id.split(':')[1]}.close();">Close</button>
+                            <button class="btn btn-error" name="id" value={authenticator.id.split(':')[1]} onclick="modal_delete_{authenticator.id.split(':')[1]}.close();">Confirm</button>
                         </div>
                     </form>
                 </Modal>

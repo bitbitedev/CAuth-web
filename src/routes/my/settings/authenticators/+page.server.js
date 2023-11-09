@@ -13,6 +13,15 @@ const edit = async ({ locals, request }) => {
     };
 };
 
+const deleteAuthenticator = async ({ locals, request }) => {
+    const { id } = Object.fromEntries(await request.formData());
+    locals.db.delete(`authenticator:${id}`);
+    return {
+        success: true
+    };
+};
+
 export const actions = {
-    edit
-}
+    edit,
+    deleteAuthenticator
+};
