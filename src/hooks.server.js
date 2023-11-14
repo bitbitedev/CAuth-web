@@ -16,5 +16,7 @@ export const handle = async ({ event, resolve }) => {
 			event.cookies.delete('token');
 		}
 	}
-	return await resolve(event);
+	const response = await resolve(event);
+	_db.close();
+	return response;
 };
