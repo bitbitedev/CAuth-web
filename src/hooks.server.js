@@ -3,7 +3,7 @@ import { db } from '$lib/server/db';
 export const handle = async ({ event, resolve }) => {
 	let response;
 	let token = event.cookies.get('token');
-	const _db = db();
+	const _db = await db();
 	if (token) {
 		try {
 			if (!(await _db.authenticate(token))) {

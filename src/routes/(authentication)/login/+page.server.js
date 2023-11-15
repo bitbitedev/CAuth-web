@@ -64,7 +64,7 @@ const verify = async ({ request, cookies, url }) => {
 		throw error(500, { message: 'Invalid request' });
 	}
 
-	const _db = db();
+	const _db = await db();
 	let token;
 	try {
 		token = await _db.signin({

@@ -6,9 +6,9 @@ import { DB_HOST, DB_USER, DB_PASSWORD, DB_NAMESPACE, DB_DATABASE } from '$env/s
  * Reauthenticating is required
  * @returns fresh database connection
  */
-const getDatabase = () => {
+const getDatabase = async () => {
 	const database = new Surreal();
-	database.connect(DB_HOST);
+	await database.connect(DB_HOST);
 	return database;
 };
 
@@ -18,8 +18,8 @@ const getDatabase = () => {
  */
 export const db = getDatabase;
 
-const getRootDatabase = () => {
-	const db = getDatabase();
+const getRootDatabase = async () => {
+	const db = await getDatabase();
 	db.signin({
 		username: DB_USER,
 		password: DB_PASSWORD
@@ -28,4 +28,4 @@ const getRootDatabase = () => {
 	return db;
 };
 
-export const rootDB = getRootDatabase();
+export const rootDB = await getRootDatabase();

@@ -74,7 +74,7 @@ const verify = async ({ request, cookies }) => {
 		});
 		throw error(500, { message: 'Error verifying registration' });
 	}
-	const _db = db();
+	const _db = await db();
 	try {
 		const token = await _db.signup({
 			namespace: DB_NAMESPACE,
