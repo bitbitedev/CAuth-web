@@ -31,7 +31,7 @@
                             </div>
                             <div class="flex flex-col gap-1">
                                 <div class="text-sm">{authenticator.id.split(':')[1]}</div>
-                                <div class="text-sm">{new Date(authenticator.createdAt).toLocaleDateString("de-DE")}</div>
+                                <div class="text-sm">{new Date(authenticator.createdAt).toLocaleDateString(data.lang)}</div>
                             </div>
                         </div>
                     </div>

@@ -30,7 +30,7 @@
 							{authReq.status ?? '-'}
 						</td>
 						<td>
-							{new Date(authReq.createdAt).toLocaleTimeString('de-DE', {
+							{new Date(authReq.createdAt).toLocaleTimeString(data.lang, {
 								year: 'numeric',
 								month: 'numeric',
 								day: 'numeric',

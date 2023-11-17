@@ -85,7 +85,7 @@
 					{#each data.secrets as secret}
 						<tr>
 							<td>{secret.name}</td>
-							<td class="text-center">{new Date(secret.createdAt).toLocaleDateString('de-DE')}</td>
+							<td class="text-center">{new Date(secret.createdAt).toLocaleDateString(data.lang)}</td>
 							<td>
 								<button class="btn btn-error btn-circle text-white btn-sm text-xl" onclick="modal_secret_delete_{secret.id.split(':')[1]}.showModal();">
 									<Delete/>

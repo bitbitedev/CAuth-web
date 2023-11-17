@@ -9,7 +9,7 @@ export const load = async ({ locals }) => {
 	);
 
 	return {
-		firstDayOfWeek: new Date(recentAuths[0]).toLocaleDateString('de-DE'),
+		firstDayOfWeek: new Date(recentAuths[0]).toLocaleDateString(locals.lang),
 		recentAuths: recentAuths[1]
 	};
 };
