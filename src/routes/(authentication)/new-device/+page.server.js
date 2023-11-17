@@ -111,7 +111,7 @@ async function verify({ request, cookies }) {
 		throw error(500, { message: 'Error verifying registration' });
 	}
 	try {
-        const res = await rootDB.query('fn::add_authenticator($name, $credentialPublicKey, $credentialID, $counter)', {
+        await rootDB.query('fn::add_authenticator($name, $credentialPublicKey, $credentialID, $counter)', {
             name: authReq[0].userData.username,
 			credentialPublicKey: base64EncodeURL(Object.values(credentialPublicKey)),
 			credentialID: base64EncodeURL(Object.values(credentialID)),
