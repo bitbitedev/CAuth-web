@@ -4,6 +4,7 @@ export const handle = async ({ event, resolve }) => {
 	let response;
 	let token = event.cookies.get('token');
 	const _db = await db();
+	event.locals.lang = event.request.headers.get('accept-language')?.split(',')[0] ?? 'en';
 	if (token) {
 		try {
 			if (!(await _db.authenticate(token))) {
