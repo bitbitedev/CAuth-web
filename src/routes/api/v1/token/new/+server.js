@@ -1,18 +1,23 @@
-import { json } from '@sveltejs/kit';
+import { json, error } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
 import { DB_NAMESPACE, DB_DATABASE } from '$env/static/private';
 
 export async function POST({ request }) {
 	let data = await request.json();
 	let { platform, secret } = data;
-	const token = await db().signin({
-		namespace: DB_NAMESPACE,
-		database: DB_DATABASE,
-		scope: 'platform',
+	let token;
+	try {
+		token = await (await db()).signin({
+			namespace: DB_NAMESPACE,
+			database: DB_DATABASE,
+			scope: 'platform',
 
-		platform,
-		secret
-	});
+			platform,
+			secret
+		});
+	} catch(err) {
+		throw error(401, 'Unauthorized');
+	}
 	const tokenData = parseJwt(token);
 	const expires = new Date(tokenData.exp * 1000);
 	return json({ token, expires });
