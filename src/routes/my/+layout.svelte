@@ -5,7 +5,7 @@
 <div id="content">
 	<menu>
 		<a href="/my" class="btn mt-1">Profile</a>
-		<a href="/my/sessions" class="btn mt-1">Active Sessions</a>
+		<a href="/my/sessions" class="btn mt-1">Sessions</a>
 		<a href="/my/activities" class="btn mt-1">Activities</a>
 		<a href="/my/settings" class="btn mt-1">Settings</a>
 		{#if data.settings?.developermode}
