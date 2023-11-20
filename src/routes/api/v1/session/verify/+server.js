@@ -3,6 +3,8 @@ import { db } from '$lib/server/db';
 
 export async function POST({ request }) {
 	let { session } = await request.json();
+	if(!session)
+		throw error(400, 'Bad request');
 	const authToken = request.headers.get('authorization')?.replace('Bearer ', '');
 	if(!authToken)
 		throw error(401, 'Unauthorized');
