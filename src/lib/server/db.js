@@ -20,11 +20,11 @@ export const db = getDatabase;
 
 const getRootDatabase = async () => {
 	const db = await getDatabase();
-	db.signin({
+	await db.signin({
 		username: DB_USER,
 		password: DB_PASSWORD
 	});
-	db.use({ namespace: DB_NAMESPACE, database: DB_DATABASE });
+	await db.use({ namespace: DB_NAMESPACE, database: DB_DATABASE });
 	return db;
 };
 
