@@ -82,10 +82,12 @@ const verify = async ({ request, cookies, url }) => {
 		});
 		throw error(500, { message: 'Login failed' });
 	}
-
 	const platform = await getPlatformByName(url.searchParams.get('ref'));
 	if (platform) {
-		throw redirect(302, `${platform.returnUrl}?session=${authReq}`);
+		const [[session]] = await _db.query('SELECT * FROM session WHERE platform = $platform ORDER BY createdAt DESC LIMIT 1', {
+			platform: platform.id
+		});
+		throw redirect(302, `${platform.returnUrl}?session=${session.id.split(':')[1]}`);
 	}
 
 	cookies.set('token', token);
