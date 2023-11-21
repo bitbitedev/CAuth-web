@@ -1,6 +1,6 @@
 <script>
 	import { Input } from '$lib/components';
-	import { applyAction, deserialize } from '$app/forms';
+	import { applyAction, deserialize, enhance } from '$app/forms';
 	import { startAuthentication } from '@simplewebauthn/browser';
 
 	export let data;
@@ -56,12 +56,8 @@
 </script>
 
 <div class="flex h-full w-full items-center justify-center">
-	<form
-		method="POST"
-		id="signup"
-		class="card h-min w-min min-w-max bg-base-100 p-5 shadow-xl"
-		on:submit|preventDefault={submit}>
-		<h2 class="mb-2 text-center text-3xl font-bold tracking-tight text-base-content">Login</h2>
+	<div class="card h-min w-min min-w-max bg-base-100 p-5 shadow-xl">
+	<h2 class="mb-2 text-center text-3xl font-bold tracking-tight text-base-content">Login</h2>
 		{#if data.platform}
 			<div class="text-center alert text-md flex flex-col border-primary mb-4">
 				<p>You are trying to login to a different plattform:</p>
@@ -89,13 +85,28 @@
 				</div>
 			</div>
 		{/if}
-		<Input
-			type="text"
-			id="username"
-			bind:value={username}
-			label="Username"
-			placeholder="Username" />
-		<button class="btn-primary btn w-full" {disabled}>Login</button>
+		{#if data.loggedIn && data.platform}
+			<div role="alert" class="alert alert-info">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+				<span>You are logged in as <b>{data.user.name}</b></span>
+			</div>
+			<form action="?/createSession" method="POST" class="mt-4" use:enhance>
+				<button class="btn btn-primary w-full" name="platform" value={data.platform.id.split(':')[1]}>Continue as <b>{data.user.name}</b></button>
+			</form>
+		{:else}
+			<form
+				method="POST"
+				id="signup"
+				on:submit|preventDefault={submit}>
+				<Input
+					type="text"
+					id="username"
+					bind:value={username}
+					label="Username"
+					placeholder="Username" />
+				<button class="btn-primary btn w-full" {disabled}>Login</button>
+			</form>
+		{/if}
 		<div class="divider" />
 		<p class="text-center text-xs">
 			<a href="/new-device" class="text-xs text-primary hover:cursor-pointer">
@@ -107,5 +118,5 @@
 				Sign up here
 			</a>
 		</p>
-	</form>
+	</div>
 </div>
