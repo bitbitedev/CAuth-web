@@ -95,9 +95,19 @@ const verify = async ({ request, cookies, url }) => {
 	throw redirect(302, '/my');
 };
 
+const createSession = async ({ locals, request }) => {
+	const { platform } = Object.fromEntries(await request.formData());
+	const [ platformData ] = await locals.db.select(`platform:${platform}`);
+	const [[ session ]] = await locals.db.query('fn::session_create($platform)', {
+		platform: platformData.id
+	});
+	throw redirect(302, `${platformData.returnUrl}?session=${session.id.split(':')[1]}`);
+};
+
 export const actions = {
 	login,
-	verify
+	verify,
+	createSession
 };
 
 const getPlatformByName = async (name) => {
