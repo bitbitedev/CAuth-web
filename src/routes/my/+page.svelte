@@ -5,7 +5,7 @@
 <div class="card bg-base-100">
 	<div class="card-body">
 		<div class="card-title">Profile</div>
-		<div class="stats shadow">
+		<div class="stats shadow-xl bg-base-300">
 			<div class="stat">
 				<div class="stat-title">Auth Requests this week</div>
 				<div class="stat-value">{data.recentAuths.length}</div>

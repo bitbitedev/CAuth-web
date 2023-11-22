@@ -9,7 +9,7 @@
 
 <h1>Authenticators</h1>
 <div class="divider m-0"></div>
-<div class="flex gap-4 p-4">
+<div class="flex flex-wrap gap-4 p-4">
 	{#each data.authenticators as authenticator}
         <div class="card card-compact bg-base-100 shadow-2xl">
             <div class="card-body">
