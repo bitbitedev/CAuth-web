@@ -55,7 +55,7 @@
         <div class="card card-compact bg-base-300 mt-4 w-max">
             <div class="card-body">
                 <div class="card-title">Legend</div>
-                <div class="grid auto-cols-fr lg:grid-cols-2 gap-2">
+                <div class="grid grid-cols-[120px_1fr] lg:grid-cols-2 gap-2">
                     <span class="badge badge-outline badge-success">active</span>
                     <ul class="list-disc">
                         <li>This session is active</li>
