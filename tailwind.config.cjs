@@ -8,7 +8,7 @@ const config = {
 		themes: [
 			{
 				light: {
-					...require('daisyui/src/theming/themes')['[data-theme=light]'],
+					...require('daisyui/src/theming/themes')['light'],
 					primary: '#5959b0',
 					warning: '#ff8c00',
 					success: '#4CA64C',
@@ -16,7 +16,7 @@ const config = {
 			},
 			{
 				dark: {
-					...require('daisyui/src/theming/themes')['[data-theme=dark]'],
+					...require('daisyui/src/theming/themes')['dark'],
 					primary: '#5959b0',
 					warning: '#ff8c00',
 					success: '#4CA64C',
