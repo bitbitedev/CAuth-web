@@ -31,37 +31,25 @@
 			If you are a developer and want to use our authentication service, you can register your
 			platform here.
 		</p>
-		<div>
-			<table>
-				<thead>
-					<tr>
-						<td>name</td>
-						<td>description</td>
-						<td>url</td>
-						<td>return url</td>
-						<td />
-					</tr>
-				</thead>
-				<tbody>
-					{#each data.platforms as platform}
-						<tr>
-							<td>{platform.name}</td>
-							<td>{platform.description}</td>
-							<td>{platform.url}</td>
-							<td>{platform.returnUrl}</td>
-							<td>
-								<a
-									href="/my/platform/{platform.id.split(':')[1]}"
-									class="btn btn-primary btn-md btn-circle text-2xl">
-									<ShieldLock />
-								</a>
-							</td>
-						</tr>
-					{/each}
-				</tbody>
-			</table>
+		<div class="flex flex-wrap gap-4">
+			{#each data.platforms as platform}
+				<div class="card bg-base-300 shadow-xl">
+					<div class="card-body">
+						<div class="card-title">{platform.name}</div>
+						<p>{platform.description}</p>
+						<div class="card-actions justify-end">
+							<a
+								href="/my/platform/{platform.id.split(':')[1]}"
+								class="btn btn-primary btn-md text-2xl">
+								<ShieldLock />
+								<span class="text-sm">Settings</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			{/each}
 		</div>
-		<div class="card-actions">
+		<div class="card-actions mt-4">
 			<button class="btn btn-primary" onclick="modal_platform_register.showModal();">
 				Register new Platform
 			</button>
