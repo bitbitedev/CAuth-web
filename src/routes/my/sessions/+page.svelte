@@ -2,8 +2,7 @@
     export let data;
 
     const dateSettings = {
-        year: 'numeric',
-        month: 'numeric',
+        month: 'long',
         day: 'numeric',
         hour: '2-digit',
         minute: '2-digit'

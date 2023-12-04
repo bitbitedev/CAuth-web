@@ -2,6 +2,7 @@
 	import { Pagination } from '$lib/components';
 
 	export let data;
+	const currentYear = new Date().getFullYear();
 </script>
 
 <div class="card bg-base-100">
@@ -31,12 +32,11 @@
 						</td>
 						<td>
 							{new Date(authReq.createdAt).toLocaleTimeString(data.lang, {
-								year: 'numeric',
-								month: 'numeric',
+								year: new Date(authReq.createdAt).getFullYear() == currentYear ? undefined : 'numeric',
+								month: 'long',
 								day: 'numeric',
 								hour: '2-digit',
-								minute: '2-digit',
-								second: '2-digit'
+								minute: '2-digit'
 							})}
 						</td>
 					</tr>
