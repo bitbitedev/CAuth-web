@@ -10,10 +10,10 @@
 	export let data;
 
 	let disabled = true;
-	let name = 'PMS';
-	let description = 'Project Management Software';
-	let url = 'https://pms.netcode.dev';
-	let returnurl = 'https://pms.netcode.dev/login';
+	let name = '';
+	let description = '';
+	let url = '';
+	let returnurl = '';
 
 	$: {
 		disabled =
