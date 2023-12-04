@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 
 export async function load({ locals }) {
-	const [ sessions ] = await locals.db.query('SELECT * FROM (SELECT * FROM session) WHERE date > time::now - 1w ORDER BY valid DESC, createdAt DESC FETCH platform');
+	const [ sessions ] = await locals.db.query('SELECT * FROM (SELECT * FROM session WHERE createdAt > (time::now() - 1w)) ORDER BY valid DESC, createdAt DESC FETCH platform');
 	return { sessions };
 }
 
