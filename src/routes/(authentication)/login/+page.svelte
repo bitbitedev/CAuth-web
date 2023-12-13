@@ -1,58 +1,12 @@
 <script>
 	import { Input } from '$lib/components';
-	import { applyAction, deserialize, enhance } from '$app/forms';
-	import { startAuthentication } from '@simplewebauthn/browser';
+	import { enhance } from '$app/forms';
 
 	export let data;
 
 	let username = '';
 	let error = '';
 	let disabled = false;
-
-	async function submit() {
-		disabled = true;
-		let formData = new FormData();
-		formData.append('username', username);
-		const loginUrl = data.platform ? window.location + '&/login' : '?/login';
-		const response = await fetch(loginUrl, {
-			method: 'POST',
-			body: formData
-		});
-		const responseJSON = deserialize(await response.text());
-		if (responseJSON.type === 'error') {
-			error = responseJSON.error.message;
-			disabled = false;
-			return;
-		}
-		if (responseJSON.type === 'success') {
-			const { options, authReq } = responseJSON.data;
-			let assertResp;
-			try {
-				assertResp = await startAuthentication(options);
-			} catch (err) {
-				if (err.name === 'InvalidStateError') {
-					error = 'Error: Worng authenticator';
-				} else {
-					error = err;
-				}
-			}
-			formData = new FormData();
-			formData.append('assertResponse', JSON.stringify(assertResp));
-			formData.append('authReq', authReq);
-			const verifyUrl = data.platform ? window.location + '&/verify' : '?/verify';
-			const response = await fetch(verifyUrl, {
-				method: 'POST',
-				body: formData
-			});
-			const verification = deserialize(await response.text());
-			if (verification.type === 'error') {
-				error = verification.error.message;
-				return;
-			}
-			applyAction(verification);
-		}
-		disabled = false;
-	}
 </script>
 
 <div class="flex h-full w-full items-center justify-center">
@@ -96,14 +50,16 @@
 		{:else}
 			<form
 				method="POST"
-				id="signup"
-				on:submit|preventDefault={submit}>
+				action="?/login">
 				<Input
 					type="text"
 					id="username"
-					bind:value={username}
+					value={username}
 					label="Username"
 					placeholder="Username" />
+				{#if data.platform}
+					<input type="hidden" name="platform" value={data.platform.name} />
+				{/if}
 				<button class="btn-primary btn w-full" {disabled}>Login</button>
 			</form>
 		{/if}
