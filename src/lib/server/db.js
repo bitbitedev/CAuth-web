@@ -28,4 +28,4 @@ const getRootDatabase = async () => {
 	return db;
 };
 
-export const rootDB = await getRootDatabase();
+export const rootDB = getRootDatabase();

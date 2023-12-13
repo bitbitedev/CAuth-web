@@ -1,6 +1,6 @@
 import { rootDB } from '$lib/server/db';
 import { error, redirect } from '@sveltejs/kit';
-import { getPlatformByName } from '$lib/utils';
+import { getPlatformByName } from '$lib/utils/server';
 
 export const load = async ({ url }) => {
 	const platform = await getPlatformByName(url.searchParams.get('ref'));
