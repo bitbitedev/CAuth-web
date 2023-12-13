@@ -13,7 +13,8 @@ export const load = async ({ url }) => {
 const login = async ({ request }) => {
 	let body = Object.fromEntries(await request.formData());
 	if (Object.prototype.hasOwnProperty.call(body, 'username')) {
-		let [user] = await rootDB.select(`user:${body.username}`);
+		const _rootDB = await rootDB;
+		let [user] = await _rootDB.select(`user:${body.username}`);
 		if (user === undefined) {
 			throw error(500, { message: 'User not found' });
 		}
@@ -27,7 +28,7 @@ const login = async ({ request }) => {
 			}
 		};
 		if (platform) authReqData.platform = platform.id;
-		const [ authReq ] = await rootDB.create('authRequest', authReqData);
+		const [ authReq ] = await _rootDB.create('authRequest', authReqData);
 		throw redirect(302, `/auth/${authReq.id.split(':')[1]}`);
 	}
 	throw error(500, { error: 'invalid request' });

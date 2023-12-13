@@ -7,7 +7,8 @@ import { RP_ID, RP_ORIGIN } from '$env/static/private';
 export async function POST({ request }) {
 	const { assertResponse, authReq } = await request.json();
 
-	let expectedChallenge = await rootDB.query(
+	const _rootDB = await rootDB;
+	let expectedChallenge = await _rootDB.query(
 		"SELECT VALUE challenge FROM type::thing('authRequest',$id)",
 		{
 			id: authReq
@@ -18,7 +19,7 @@ export async function POST({ request }) {
 	}
 	[ expectedChallenge ] = expectedChallenge[0];
 
-	let authenticator = await rootDB.query(
+	let authenticator = await _rootDB.query(
 		'SELECT * FROM authenticator WHERE credentialID = $credentialID',
 		{
 			credentialID: assertResponse.rawId
@@ -41,16 +42,16 @@ export async function POST({ request }) {
 			authenticator
 		});
 	} catch (error) {
-		await rootDB.merge(`authRequest:${authReq}`, {
+		await _rootDB.merge(`authRequest:${authReq}`, {
 			status: 'failed'
 		});
 		return json({ status: 'error', error: error.message });
 	}
 	if (verification.verified) {
-		await rootDB.merge(authenticator.id, {
+		await _rootDB.merge(authenticator.id, {
 			counter: verification.authenticationInfo.newCounter
 		});
-		await rootDB.merge(`authRequest:${authReq}`, {
+		await _rootDB.merge(`authRequest:${authReq}`, {
 			status: 'verified',
 			authenticator: authenticator.id
 		});

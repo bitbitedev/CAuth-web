@@ -15,7 +15,8 @@ export const actions = {
 async function requestCode({ request }) {
 	let body = Object.fromEntries(await request.formData());
 	if (Object.prototype.hasOwnProperty.call(body, 'username')) {
-		let [user] = await rootDB.select(`user:${body.username}`);
+		const _rootDB = await rootDB;
+		let [user] = await _rootDB.select(`user:${body.username}`);
 		if (user === undefined) {
 			throw error(500, { message: 'User not found' });
 		}
@@ -31,7 +32,7 @@ async function requestCode({ request }) {
 			}
 		});
 		let code = generateCode();
-		await rootDB.merge(user.id, {
+		await _rootDB.merge(user.id, {
 			newDeviceCode: code
 		});
 		try {
@@ -56,7 +57,7 @@ async function getChallenge({ request }) {
 		Object.prototype.hasOwnProperty.call(body, 'username') &&
 		Object.prototype.hasOwnProperty.call(body, 'code')
 	) {
-        let [user] = await rootDB.select(`user:${body.username}`);
+        let [user] = await _rootDB.select(`user:${body.username}`);
 		if (user === undefined) {
 			throw error(500, { message: 'User not found' });
 		}
@@ -69,7 +70,8 @@ async function getChallenge({ request }) {
 			userName: body.username,
 			attestationType: 'direct'
 		});
-		const authReq = await rootDB.create('authRequest', {
+		const _rootDB = await rootDB;
+		const authReq = await _rootDB.create('authRequest', {
 			challenge: options.challenge,
 			createdAt: new Date(),
 			type: 'new device',
@@ -86,7 +88,8 @@ async function getChallenge({ request }) {
 async function verify({ request, cookies }) {
 	const { attest, id } = Object.fromEntries(await request.formData());
 
-	const authReq = await rootDB.select(`authRequest:${id}`);
+	const _rootDB = await rootDB;
+	const authReq = await _rootDB.select(`authRequest:${id}`);
 
 	let verification;
 	try {
@@ -111,17 +114,17 @@ async function verify({ request, cookies }) {
 		throw error(500, { message: 'Error verifying registration' });
 	}
 	try {
-        await rootDB.query('fn::add_authenticator($name, $credentialPublicKey, $credentialID, $counter)', {
+        await _rootDB.query('fn::add_authenticator($name, $credentialPublicKey, $credentialID, $counter)', {
             name: authReq[0].userData.username,
 			credentialPublicKey: base64EncodeURL(Object.values(credentialPublicKey)),
 			credentialID: base64EncodeURL(Object.values(credentialID)),
             counter
         });
-		rootDB.merge(`authRequest:${id}`, {
+		_rootDB.merge(`authRequest:${id}`, {
 			status: 'verified'
 		});
 	} catch (err) {
-		rootDB.merge(`authRequest:${id}`, {
+		_rootDB.merge(`authRequest:${id}`, {
 			status: 'failed'
 		});
 		throw error(500, { message: 'Signup failed' });

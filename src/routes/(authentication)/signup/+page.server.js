@@ -11,7 +11,8 @@ const signup = async ({ request }) => {
 		Object.prototype.hasOwnProperty.call(body, 'username') &&
 		Object.prototype.hasOwnProperty.call(body, 'email')
 	) {
-		let [ user ] = await rootDB.query(
+		const _rootDB = await rootDB;
+		let [ user ] = await _rootDB.query(
 			'SELECT id FROM user WHERE id = type::thing("user",$name) OR email = $email',
 			{
 				name: body.username,
@@ -32,7 +33,7 @@ const signup = async ({ request }) => {
 			userName: body.username,
 			attestationType: 'direct'
 		});
-		const authReq = await rootDB.create('authRequest', {
+		const authReq = await _rootDB.create('authRequest', {
 			challenge: options.challenge,
 			createdAt: new Date(),
 			type: 'signup',
@@ -50,7 +51,8 @@ const signup = async ({ request }) => {
 const verify = async ({ request, cookies }) => {
 	const { attest, id } = Object.fromEntries(await request.formData());
 
-	const authReq = await rootDB.select(`authRequest:${id}`);
+	const _rootDB = await rootDB;
+	const authReq = await _rootDB.select(`authRequest:${id}`);
 
 	let verification;
 	try {

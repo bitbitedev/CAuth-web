@@ -7,7 +7,8 @@ export async function load({ cookies, url }) {
 		cookies.delete('token', { path: '/' });
 		throw redirect(302, '/');
 	} else {
-		const [[session]] = await rootDB.query(`SELECT * FROM session:${sessionId} FETCH platform`);
+		const _rootDB = await rootDB;
+		const [[session]] = await _rootDB.query(`SELECT * FROM session:${sessionId} FETCH platform`);
 		if(session){
 			rootDB.merge(session.id, { invalidated: true });
 			throw redirect(303, session.platform.url);
