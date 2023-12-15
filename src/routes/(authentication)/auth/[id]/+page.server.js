@@ -4,10 +4,16 @@ import { generateAuthenticationOptions } from '@simplewebauthn/server';
 import { DB_NAMESPACE, DB_DATABASE } from '$env/static/private';
 import { base64DecodeURL } from '$lib/utils';
 
-export async function load({ params }) {
+export async function load({ params, url }) {
 	const { id } = params;
 	const _rootDB = await rootDB;
 	const [authReq] = await _rootDB.select(`authRequest:${id}`);
+	const external = url.searchParams.get('external') != null;
+	if(external && authReq){
+		await _rootDB.merge(`authRequest:${id}`, {
+			external: true
+		});
+	}
 	let [user] = await _rootDB.select(`user:${authReq.userData.username}`);
 	if (user === undefined) {
 		throw error(500, { message: 'User not found' });
@@ -33,11 +39,14 @@ export async function load({ params }) {
 		challenge: options.challenge
 	});
     return {
-		options
+		options,
+		external,
+		code: id.slice(-6),
+		id
 	};
 };
 
-const verify = async ({ request, cookies, url, params }) => {
+const verify = async ({ request, cookies, params }) => {
 	let { assertResponse } = Object.fromEntries(await request.formData());
 	let { id } = params;
 	const _rootDB = await rootDB;
@@ -65,13 +74,13 @@ const verify = async ({ request, cookies, url, params }) => {
 			assertResponse
 		});
 	} catch (err) {
-		rootDB.merge(`authRequest:${id}`, {
+		_rootDB.merge(`authRequest:${id}`, {
 			status: 'failed'
 		});
 		throw error(500, { message: 'Login failed' });
 	}
 	const [authReq] = await _rootDB.select(`authRequest:${id}`);
-	if(authReq.platform){
+	if(!authReq.external && authReq.platform){
 		const [platform] = await _rootDB.select(authReq.platform);
 		if (platform) {
 			const [[session]] = await _db.query('SELECT * FROM session WHERE platform = $platform ORDER BY createdAt DESC LIMIT 1', {
@@ -79,6 +88,14 @@ const verify = async ({ request, cookies, url, params }) => {
 			});
 			throw redirect(302, `${platform.returnUrl}?session=${session.id.split(':')[1]}`);
 		}
+	} else if(authReq.external){
+		_rootDB.merge(`authRequest:${id}`, {
+			userData: {
+				...authReq.userData,
+				token
+			}
+		});
+		throw redirect(302, '/my');
 	}
 
 	cookies.set('token', token, {

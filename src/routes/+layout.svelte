@@ -3,12 +3,10 @@
 	import { page } from '$app/stores';
 	import Logout from 'svelte-material-icons/ExitToApp.svelte';
 	import AccountCircle from 'svelte-material-icons/AccountCircle.svelte';
+	import { ucfirst } from '$lib/utils';
 
 	export let data;
 
-	function ucfirst(string) {
-		return string.charAt(0).toUpperCase() + string.slice(1);
-	}
 	let url = '';
 	$: {
 		let path = ucfirst($page.url.pathname.split('/')[1]);

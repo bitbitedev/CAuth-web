@@ -10,7 +10,7 @@ export const load = async ({ url }) => {
 		};
 };
 
-const login = async ({ request }) => {
+const login = async ({ request, getClientAddress }) => {
 	let body = Object.fromEntries(await request.formData());
 	if (Object.prototype.hasOwnProperty.call(body, 'username')) {
 		const _rootDB = await rootDB;
@@ -24,7 +24,8 @@ const login = async ({ request }) => {
 			type: 'login',
 			status: 'pending',
 			userData: {
-				username: body.username
+				username: body.username,
+				ip: getClientAddress()
 			}
 		};
 		if (platform) authReqData.platform = platform.id;
