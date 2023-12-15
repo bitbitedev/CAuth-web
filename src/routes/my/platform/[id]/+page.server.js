@@ -2,7 +2,7 @@ import { error, redirect } from '@sveltejs/kit';
 import { validatePlatformDescription, validatePlatformUrl } from '$lib/utils/index.js';
 
 export async function load({ params, locals }) {
-	if(!locals.loggedIn) throw redirect(307, '/login');
+	if(!locals.loggedIn) redirect(307, '/login');
 	const { id } = params;
 	const [platform] = await locals.db.select(`platform:${id}`);
 	const [ secrets ] = await locals.db.query('SELECT * FROM type::thing("platform",$id)->secrets->secret', { id });

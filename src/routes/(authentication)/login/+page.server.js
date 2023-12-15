@@ -16,7 +16,7 @@ const login = async ({ request, getClientAddress }) => {
 		const _rootDB = await rootDB;
 		let [user] = await _rootDB.select(`user:${body.username}`);
 		if (user === undefined) {
-			throw error(500, { message: 'User not found' });
+			error(500, { message: 'User not found' });
 		}
 		const platform = await getPlatformByName(body.platform);
 		const authReqData = {
@@ -30,9 +30,9 @@ const login = async ({ request, getClientAddress }) => {
 		};
 		if (platform) authReqData.platform = platform.id;
 		const [ authReq ] = await _rootDB.create('authRequest', authReqData);
-		throw redirect(302, `/auth/${authReq.id.split(':')[1]}`);
+		redirect(302, `/auth/${authReq.id.split(':')[1]}`);
 	}
-	throw error(500, { error: 'invalid request' });
+	error(500, { error: 'invalid request' });
 };
 
 const createSession = async ({ locals, request }) => {
@@ -41,7 +41,7 @@ const createSession = async ({ locals, request }) => {
 	const [[ session ]] = await locals.db.query('fn::session_create($platform)', {
 		platform: platformData.id
 	});
-	throw redirect(302, `${platformData.returnUrl}?session=${session.id.split(':')[1]}`);
+	redirect(302, `${platformData.returnUrl}?session=${session.id.split(':')[1]}`);
 };
 
 export const actions = {

@@ -6,10 +6,10 @@ export async function load({ locals }) {
 }
 
 const end = async ({ locals, request }) => {
-	if(!locals.loggedIn) throw error(401, 'Unauthorized');
+	if(!locals.loggedIn) error(401, 'Unauthorized');
 	const { session } = Object.fromEntries(await request.formData());
 	if(!session)
-		throw error(400, 'Invalid session');
+		error(400, 'Invalid session');
 	await locals.db.merge(`session:${session}`, { 
 		invalidated: true
 	});

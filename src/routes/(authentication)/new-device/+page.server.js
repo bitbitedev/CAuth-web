@@ -18,7 +18,7 @@ async function requestCode({ request }) {
 		const _rootDB = await rootDB;
 		let [user] = await _rootDB.select(`user:${body.username}`);
 		if (user === undefined) {
-			throw error(500, { message: 'User not found' });
+			error(500, { message: 'User not found' });
 		}
 		let transporter = nodemailer.createTransport({
 			name: 'c-auth.com',
@@ -45,7 +45,7 @@ async function requestCode({ request }) {
 			});
 		} catch (err) {
 			console.log(err);
-			throw error(500, { message: 'Failed to send mail' });
+			error(500, { message: 'Failed to send mail' });
 		}
 		return { email: user.email };
 	}
@@ -59,10 +59,10 @@ async function getChallenge({ request }) {
 	) {
         let [user] = await _rootDB.select(`user:${body.username}`);
 		if (user === undefined) {
-			throw error(500, { message: 'User not found' });
+			error(500, { message: 'User not found' });
 		}
         if (body.code != user.newDeviceCode)
-            throw error(500, { message: 'Code invalid' });
+            error(500, { message: 'Code invalid' });
 		const options = await generateRegistrationOptions({
 			rpName: RP_NAME,
 			rpID: RP_ID,
@@ -82,7 +82,7 @@ async function getChallenge({ request }) {
 		});
 		return { options, authReq: authReq[0].id.split(':')[1] };
 	}
-	throw error(500, { error: 'invalid request' });
+	error(500, { error: 'invalid request' });
 }
 
 async function verify({ request, cookies }) {
@@ -103,7 +103,7 @@ async function verify({ request, cookies }) {
 		rootDB.merge(`authRequest:${id}`, {
 			status: 'failed'
 		});
-		throw error(500, { message: 'Error verifying registration' });
+		error(500, { message: 'Error verifying registration' });
 	}
 	const { verified, registrationInfo } = verification;
 	const { credentialPublicKey, credentialID, counter } = registrationInfo;
@@ -111,7 +111,7 @@ async function verify({ request, cookies }) {
 		rootDB.merge(`authRequest:${id}`, {
 			status: 'failed'
 		});
-		throw error(500, { message: 'Error verifying registration' });
+		error(500, { message: 'Error verifying registration' });
 	}
 	try {
         await _rootDB.query('fn::add_authenticator($name, $credentialPublicKey, $credentialID, $counter)', {
@@ -127,9 +127,9 @@ async function verify({ request, cookies }) {
 		_rootDB.merge(`authRequest:${id}`, {
 			status: 'failed'
 		});
-		throw error(500, { message: 'Signup failed' });
+		error(500, { message: 'Signup failed' });
 	}
-	throw redirect(302, '/my');
+	redirect(302, '/my');
 }
 
 function generateCode() {

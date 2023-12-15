@@ -20,11 +20,11 @@ const signup = async ({ request }) => {
 			}
 		);
 		if (!Array.isArray(user)) {
-			throw error(500, { message: 'Error reading data' });
+			error(500, { message: 'Error reading data' });
 		}
 		user = user[0];
 		if (user !== undefined) {
-			throw error(500, { message: 'Username or email is already in use' });
+			error(500, { message: 'Username or email is already in use' });
 		}
 		const options = await generateRegistrationOptions({
 			rpName: RP_NAME,
@@ -45,7 +45,7 @@ const signup = async ({ request }) => {
 		});
 		return { options, authReq: authReq[0].id.split(':')[1] };
 	}
-	throw error(500, { error: 'invalid request' });
+	error(500, { error: 'invalid request' });
 };
 
 const verify = async ({ request, cookies }) => {
@@ -66,7 +66,7 @@ const verify = async ({ request, cookies }) => {
 		rootDB.merge(`authRequest:${id}`, {
 			status: 'failed'
 		});
-		throw error(500, { message: 'Error verifying registration' });
+		error(500, { message: 'Error verifying registration' });
 	}
 	const { verified, registrationInfo } = verification;
 	const { credentialPublicKey, credentialID, counter } = registrationInfo;
@@ -74,7 +74,7 @@ const verify = async ({ request, cookies }) => {
 		rootDB.merge(`authRequest:${id}`, {
 			status: 'failed'
 		});
-		throw error(500, { message: 'Error verifying registration' });
+		error(500, { message: 'Error verifying registration' });
 	}
 	const _db = await db();
 	try {
@@ -92,7 +92,7 @@ const verify = async ({ request, cookies }) => {
 		const [[authenticator]] = await _db.query('SELECT VALUE id FROM authenticator WHERE credentialID = $credentialID', {
 			credentialID: base64EncodeURL(Object.values(credentialID))
 		});
-		cookies.set('token', token);
+		cookies.set('token', token, { path: '/' });
 		rootDB.merge(`authRequest:${id}`, {
 			status: 'verified',
 			authenticator: authenticator
@@ -102,9 +102,9 @@ const verify = async ({ request, cookies }) => {
 		rootDB.merge(`authRequest:${id}`, {
 			status: 'failed'
 		});
-		throw error(500, { message: 'Signup failed' });
+		error(500, { message: 'Signup failed' });
 	}
-	throw redirect(302, '/my');
+	redirect(302, '/my');
 };
 
 export const actions = {

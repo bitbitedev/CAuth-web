@@ -16,16 +16,16 @@ const create = async ({ request, locals }) => {
 	const formData = Object.fromEntries(await request.formData());
 
 	if (!formData.name || !validatePlatformName(formData.name))
-		throw error(400, { message: 'Name is not valid' });
+		error(400, { message: 'Name is not valid' });
 
 	if (!formData.description || !validatePlatformDescription(formData.description))
-		throw error(400, { message: 'Description is not valid' });
+		error(400, { message: 'Description is not valid' });
 
 	if (!formData.url || !validatePlatformUrl(formData.url))
-		throw error(400, { message: 'Url is not valid' });
+		error(400, { message: 'Url is not valid' });
 
 	if (!formData.returnUrl || !validatePlatformUrl(formData.returnUrl))
-		throw error(400, { message: 'Return Url is not valid' });
+		error(400, { message: 'Return Url is not valid' });
 
 	locals.db.query('fn::platform_create($name, $description, $url, $returnUrl)', {
 		name: formData.name,
@@ -33,7 +33,7 @@ const create = async ({ request, locals }) => {
 		url: formData.url,
 		returnUrl: formData.returnUrl
 	});
-	throw redirect(302, '/my/platform');
+	redirect(302, '/my/platform');
 };
 
 export const actions = {

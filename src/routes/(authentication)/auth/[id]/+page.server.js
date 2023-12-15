@@ -16,7 +16,7 @@ export async function load({ params, url }) {
 	}
 	let [user] = await _rootDB.select(`user:${authReq.userData.username}`);
 	if (user === undefined) {
-		throw error(500, { message: 'User not found' });
+		error(500, { message: 'User not found' });
 	}
 	let authenticators = await _rootDB.query(
 		'SELECT * FROM type::thing("user",$user)->authenticators->authenticator',
@@ -25,7 +25,7 @@ export async function load({ params, url }) {
 		}
 	);
 	if (!Array.isArray(authenticators[0])) {
-		throw error(500, { message: 'Error reading data' });
+		error(500, { message: 'Error reading data' });
 	}
 	authenticators = authenticators[0];
 	const options = await generateAuthenticationOptions({
@@ -51,7 +51,7 @@ const verify = async ({ request, cookies, params }) => {
 	let { id } = params;
 	const _rootDB = await rootDB;
 	if(!id) {
-		throw error(500, { message: 'Invalid request' });
+		error(500, { message: 'Invalid request' });
 	}
 	try {
 		assertResponse = JSON.parse(assertResponse);
@@ -59,7 +59,7 @@ const verify = async ({ request, cookies, params }) => {
 		await _rootDB.merge(`authRequest:${id}`, {
 			status: 'failed'
 		});
-		throw error(500, { message: 'Invalid request' });
+		error(500, { message: 'Invalid request' });
 	}
 
 	const _db = await db();
@@ -77,7 +77,7 @@ const verify = async ({ request, cookies, params }) => {
 		_rootDB.merge(`authRequest:${id}`, {
 			status: 'failed'
 		});
-		throw error(500, { message: 'Login failed' });
+		error(500, { message: 'Login failed' });
 	}
 	const [authReq] = await _rootDB.select(`authRequest:${id}`);
 	if(!authReq.external && authReq.platform){
@@ -86,7 +86,7 @@ const verify = async ({ request, cookies, params }) => {
 			const [[session]] = await _db.query('SELECT * FROM session WHERE platform = $platform ORDER BY createdAt DESC LIMIT 1', {
 				platform: platform.id
 			});
-			throw redirect(302, `${platform.returnUrl}?session=${session.id.split(':')[1]}`);
+			redirect(302, `${platform.returnUrl}?session=${session.id.split(':')[1]}`);
 		}
 	} else if(authReq.external){
 		_rootDB.merge(`authRequest:${id}`, {
@@ -95,7 +95,7 @@ const verify = async ({ request, cookies, params }) => {
 				token
 			}
 		});
-		throw redirect(302, '/my');
+		redirect(302, '/my');
 	}
 
 	cookies.set('token', token, {
@@ -103,7 +103,7 @@ const verify = async ({ request, cookies, params }) => {
 		maxAge: 60 * 60 * 6
 	});
 
-	throw redirect(302, '/my');
+	redirect(302, '/my');
 };
 
 export const actions = {

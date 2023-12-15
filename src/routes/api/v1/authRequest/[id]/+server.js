@@ -5,7 +5,7 @@ export const GET = async ({ params, getClientAddress, cookies }) => {
     const _rootDB = await rootDB;
     const [authReq] = await _rootDB.select(`authRequest:${params.id}`);
     if(authReq.userData.ip !== getClientAddress()){
-        throw error(401, { message: 'Unauthorized' });
+        error(401, { message: 'Unauthorized' });
     }
     if(authReq.platform){
 		const [platform] = await _rootDB.select(authReq.platform);

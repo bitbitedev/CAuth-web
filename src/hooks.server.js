@@ -8,7 +8,7 @@ export const handle = async ({ event, resolve }) => {
 	if (token) {
 		try {
 			if (!(await _db.authenticate(token))) {
-				event.cookies.delete('token');
+				event.cookies.delete('token', { path: '/' });
 			} else {
 				event.locals.db = _db;
 				event.locals.loggedIn = true;
@@ -17,7 +17,7 @@ export const handle = async ({ event, resolve }) => {
 				event.locals.user = (await _db.query('SELECT name, email FROM $auth'))[0][0];
 			}
 		} catch (e) {
-			event.cookies.delete('token');
+			event.cookies.delete('token', { path: '/' });
 		}
 	}
 	try {

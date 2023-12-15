@@ -16,7 +16,7 @@ export async function POST({ request }) {
 			secret
 		});
 	} catch(err) {
-		throw error(401, 'Unauthorized');
+		error(401, 'Unauthorized');
 	}
 	const tokenData = parseJwt(token);
 	const expires = new Date(tokenData.exp * 1000);
