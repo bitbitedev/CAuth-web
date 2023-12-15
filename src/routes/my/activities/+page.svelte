@@ -32,7 +32,8 @@
 						</td>
 						<td>
 							{new Date(authReq.createdAt).toLocaleTimeString(data.lang, {
-								year: new Date(authReq.createdAt).getFullYear() == currentYear ? undefined : 'numeric',
+								year:
+									new Date(authReq.createdAt).getFullYear() == currentYear ? undefined : 'numeric',
 								month: 'long',
 								day: 'numeric',
 								hour: 'numeric',

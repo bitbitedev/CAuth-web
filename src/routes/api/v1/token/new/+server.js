@@ -7,7 +7,9 @@ export async function POST({ request }) {
 	let { platform, secret } = data;
 	let token;
 	try {
-		token = await (await db()).signin({
+		token = await (
+			await db()
+		).signin({
 			namespace: DB_NAMESPACE,
 			database: DB_DATABASE,
 			scope: 'platform',
@@ -15,7 +17,7 @@ export async function POST({ request }) {
 			platform,
 			secret
 		});
-	} catch(err) {
+	} catch (err) {
 		error(401, 'Unauthorized');
 	}
 	const tokenData = parseJwt(token);

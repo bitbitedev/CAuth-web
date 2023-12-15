@@ -1,5 +1,4 @@
 <script>
-
 	export let data;
 
 	let lang = data.lang;
@@ -13,7 +12,7 @@
 			method: 'POST',
 			body: formData
 		});
-	}
+	};
 </script>
 
 <h1>Settings</h1>
@@ -22,12 +21,7 @@
 	Here you can find all settings related to your account.
 	<div class="grid grid-cols-2 gap-4 p-4">
 		<div>Language</div>
-		<select
-			name="lang"
-			id="lang"
-			class="select"
-			on:change={changeSetting}
-			bind:value={lang}>
+		<select name="lang" id="lang" class="select" on:change={changeSetting} bind:value={lang}>
 			<option value="en-uk">English (UK)</option>
 			<option value="en-us">English (US)</option>
 			<option value="de">German</option>

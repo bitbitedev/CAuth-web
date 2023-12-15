@@ -9,7 +9,7 @@ export async function load({ params, url }) {
 	const _rootDB = await rootDB;
 	const [authReq] = await _rootDB.select(`authRequest:${id}`);
 	const external = url.searchParams.get('external') != null;
-	if(external && authReq){
+	if (external && authReq) {
 		await _rootDB.merge(`authRequest:${id}`, {
 			external: true
 		});
@@ -38,19 +38,19 @@ export async function load({ params, url }) {
 	await _rootDB.merge(`authRequest:${id}`, {
 		challenge: options.challenge
 	});
-    return {
+	return {
 		options,
 		external,
 		code: id.slice(-6),
 		id
 	};
-};
+}
 
 const verify = async ({ request, cookies, params }) => {
 	let { assertResponse } = Object.fromEntries(await request.formData());
 	let { id } = params;
 	const _rootDB = await rootDB;
-	if(!id) {
+	if (!id) {
 		error(500, { message: 'Invalid request' });
 	}
 	try {
@@ -80,15 +80,18 @@ const verify = async ({ request, cookies, params }) => {
 		error(500, { message: 'Login failed' });
 	}
 	const [authReq] = await _rootDB.select(`authRequest:${id}`);
-	if(!authReq.external && authReq.platform){
+	if (!authReq.external && authReq.platform) {
 		const [platform] = await _rootDB.select(authReq.platform);
 		if (platform) {
-			const [[session]] = await _db.query('SELECT * FROM session WHERE platform = $platform ORDER BY createdAt DESC LIMIT 1', {
-				platform: platform.id
-			});
+			const [[session]] = await _db.query(
+				'SELECT * FROM session WHERE platform = $platform ORDER BY createdAt DESC LIMIT 1',
+				{
+					platform: platform.id
+				}
+			);
 			redirect(302, `${platform.returnUrl}?session=${session.id.split(':')[1]}`);
 		}
-	} else if(authReq.external){
+	} else if (authReq.external) {
 		_rootDB.merge(`authRequest:${id}`, {
 			userData: {
 				...authReq.userData,
@@ -107,5 +110,5 @@ const verify = async ({ request, cookies, params }) => {
 };
 
 export const actions = {
-    verify
+	verify
 };

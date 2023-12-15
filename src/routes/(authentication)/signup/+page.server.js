@@ -12,7 +12,7 @@ const signup = async ({ request }) => {
 		Object.prototype.hasOwnProperty.call(body, 'email')
 	) {
 		const _rootDB = await rootDB;
-		let [ user ] = await _rootDB.query(
+		let [user] = await _rootDB.query(
 			'SELECT id FROM user WHERE id = type::thing("user",$name) OR email = $email',
 			{
 				name: body.username,
@@ -89,9 +89,12 @@ const verify = async ({ request, cookies }) => {
 			credentialID: base64EncodeURL(Object.values(credentialID)),
 			counter
 		});
-		const [[authenticator]] = await _db.query('SELECT VALUE id FROM authenticator WHERE credentialID = $credentialID', {
-			credentialID: base64EncodeURL(Object.values(credentialID))
-		});
+		const [[authenticator]] = await _db.query(
+			'SELECT VALUE id FROM authenticator WHERE credentialID = $credentialID',
+			{
+				credentialID: base64EncodeURL(Object.values(credentialID))
+			}
+		);
 		cookies.set('token', token, { path: '/' });
 		rootDB.merge(`authRequest:${id}`, {
 			status: 'verified',

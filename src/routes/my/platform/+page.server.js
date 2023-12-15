@@ -6,7 +6,7 @@ import {
 } from '$lib/utils/index.js';
 
 export const load = async ({ locals }) => {
-	const [ platforms ] = await locals.db.query('SELECT * FROM $auth->platforms->platform');
+	const [platforms] = await locals.db.query('SELECT * FROM $auth->platforms->platform');
 	return {
 		platforms
 	};

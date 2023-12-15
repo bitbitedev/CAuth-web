@@ -29,7 +29,7 @@ const login = async ({ request, getClientAddress }) => {
 			}
 		};
 		if (platform) authReqData.platform = platform.id;
-		const [ authReq ] = await _rootDB.create('authRequest', authReqData);
+		const [authReq] = await _rootDB.create('authRequest', authReqData);
 		redirect(302, `/auth/${authReq.id.split(':')[1]}`);
 	}
 	error(500, { error: 'invalid request' });
@@ -37,8 +37,8 @@ const login = async ({ request, getClientAddress }) => {
 
 const createSession = async ({ locals, request }) => {
 	const { platform } = Object.fromEntries(await request.formData());
-	const [ platformData ] = await locals.db.select(`platform:${platform}`);
-	const [[ session ]] = await locals.db.query('fn::session_create($platform)', {
+	const [platformData] = await locals.db.select(`platform:${platform}`);
+	const [[session]] = await locals.db.query('fn::session_create($platform)', {
 		platform: platformData.id
 	});
 	redirect(302, `${platformData.returnUrl}?session=${session.id.split(':')[1]}`);

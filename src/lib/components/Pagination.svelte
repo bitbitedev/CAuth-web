@@ -16,7 +16,10 @@
 		</a>
 		{#if pageCount <= 10}
 			{#each Array(pageCount) as _, i}
-				<a href={`${url}?${param}=${i + 1}`} class="join-item btn" class:btn-active={i + 1 == currentIndex}>
+				<a
+					href={`${url}?${param}=${i + 1}`}
+					class="join-item btn"
+					class:btn-active={i + 1 == currentIndex}>
 					{i + 1}
 				</a>
 			{/each}
@@ -24,7 +27,10 @@
 			<a href={`${url}?${param}=1`} class="btn" class:btn-active={currentIndex == 1}>1</a>
 			{#if currentIndex < 5}
 				{#each Array(Math.min(pageCount, 5) - 1) as _, i}
-					<a href={`${url}?${param}=${i + 2}`} class="join-item btn" class:btn-active={i + 2 == currentIndex}>
+					<a
+						href={`${url}?${param}=${i + 2}`}
+						class="join-item btn"
+						class:btn-active={i + 2 == currentIndex}>
 						{i + 2}
 					</a>
 				{/each}

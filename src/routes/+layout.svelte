@@ -18,13 +18,27 @@
 	<title>CAuth &there4; {url}</title>
 </svelte:head>
 <div class="drawer h-screen md:drawer-open">
-	<input id="side-menu" type="checkbox" class="drawer-toggle" /> 
+	<input id="side-menu" type="checkbox" class="drawer-toggle" />
 	<div class="drawer-content">
 		<header class="navbar border-b-primary border-b-2 bg-base-100 p-2 fixed z-50 left-0">
 			<div class="flex-1">
 				{#if data.loggedIn}
-					<label for="side-menu" aria-label="open sidebar" class="btn btn-square btn-ghost min-h-8 h-8 w-8 mr-4 md:hidden">
-						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+					<label
+						for="side-menu"
+						aria-label="open sidebar"
+						class="btn btn-square btn-ghost min-h-8 h-8 w-8 mr-4 md:hidden">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							class="inline-block w-6 h-6 stroke-current">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M4 6h16M4 12h16M4 18h16">
+							</path>
+						</svg>
 					</label>
 				{/if}
 				<a href="/" class="flex items-center gap-3">
@@ -44,7 +58,9 @@
 					</a>
 				{:else}
 					<a href="/about" class="hover:text-primary" selected={url == 'About'}>About</a>
-					<a href="/platforms" class="hover:text-primary" selected={url == 'Platforms'}>Platforms</a>
+					<a href="/platforms" class="hover:text-primary" selected={url == 'Platforms'}>
+						Platforms
+					</a>
 					<a
 						href="/login"
 						class="hover:text-primary flex items-center gap-1"
@@ -61,7 +77,7 @@
 	</div>
 	{#if data.loggedIn}
 		<div class="drawer-side">
-			<label for="side-menu" aria-label="close sidebar" class="drawer-overlay"></label> 
+			<label for="side-menu" aria-label="close sidebar" class="drawer-overlay"></label>
 			<menu class="hidden">
 				<a href="/my" class="btn mt-1">Profile</a>
 				<a href="/my/sessions" class="btn mt-1">Sessions</a>

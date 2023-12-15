@@ -44,7 +44,7 @@
 								month: 'long',
 								day: 'numeric',
 								hour: 'numeric',
-								minute: 'numeric',
+								minute: 'numeric'
 							})}
 						</div>
 					</a>

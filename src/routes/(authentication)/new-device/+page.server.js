@@ -57,12 +57,11 @@ async function getChallenge({ request }) {
 		Object.prototype.hasOwnProperty.call(body, 'username') &&
 		Object.prototype.hasOwnProperty.call(body, 'code')
 	) {
-        let [user] = await _rootDB.select(`user:${body.username}`);
+		let [user] = await _rootDB.select(`user:${body.username}`);
 		if (user === undefined) {
 			error(500, { message: 'User not found' });
 		}
-        if (body.code != user.newDeviceCode)
-            error(500, { message: 'Code invalid' });
+		if (body.code != user.newDeviceCode) error(500, { message: 'Code invalid' });
 		const options = await generateRegistrationOptions({
 			rpName: RP_NAME,
 			rpID: RP_ID,
@@ -114,12 +113,15 @@ async function verify({ request, cookies }) {
 		error(500, { message: 'Error verifying registration' });
 	}
 	try {
-        await _rootDB.query('fn::add_authenticator($name, $credentialPublicKey, $credentialID, $counter)', {
-            name: authReq[0].userData.username,
-			credentialPublicKey: base64EncodeURL(Object.values(credentialPublicKey)),
-			credentialID: base64EncodeURL(Object.values(credentialID)),
-            counter
-        });
+		await _rootDB.query(
+			'fn::add_authenticator($name, $credentialPublicKey, $credentialID, $counter)',
+			{
+				name: authReq[0].userData.username,
+				credentialPublicKey: base64EncodeURL(Object.values(credentialPublicKey)),
+				credentialID: base64EncodeURL(Object.values(credentialID)),
+				counter
+			}
+		);
 		_rootDB.merge(`authRequest:${id}`, {
 			status: 'verified'
 		});

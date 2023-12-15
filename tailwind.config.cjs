@@ -11,7 +11,7 @@ const config = {
 					...require('daisyui/src/theming/themes')['light'],
 					primary: '#5959b0',
 					warning: '#ff8c00',
-					success: '#4CA64C',
+					success: '#4CA64C'
 				}
 			},
 			{
@@ -19,7 +19,7 @@ const config = {
 					...require('daisyui/src/theming/themes')['dark'],
 					primary: '#5959b0',
 					warning: '#ff8c00',
-					success: '#4CA64C',
+					success: '#4CA64C'
 				}
 			},
 			'night'

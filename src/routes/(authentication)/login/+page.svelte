@@ -11,7 +11,7 @@
 
 <div class="flex h-full w-full items-center justify-center">
 	<div class="card h-min w-min min-w-max bg-base-100 p-5 shadow-xl">
-	<h2 class="mb-2 text-center text-3xl font-bold tracking-tight text-base-content">Login</h2>
+		<h2 class="mb-2 text-center text-3xl font-bold tracking-tight text-base-content">Login</h2>
 		{#if data.platform}
 			<div class="text-center alert text-md flex flex-col border-primary mb-4">
 				<p>You are trying to login to a different plattform:</p>
@@ -41,22 +41,33 @@
 		{/if}
 		{#if data.loggedIn && data.platform}
 			<div role="alert" class="alert alert-info">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-				<span>You are logged in as <b>{data.user.name}</b></span>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					class="stroke-current shrink-0 w-6 h-6">
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+					</path>
+				</svg>
+				<span>
+					You are logged in as <b>{data.user.name}</b>
+				</span>
 			</div>
 			<form action="?/createSession" method="POST" class="mt-4" use:enhance>
-				<button class="btn btn-primary w-full" name="platform" value={data.platform.id.split(':')[1]}>Continue as <b>{data.user.name}</b></button>
+				<button
+					class="btn btn-primary w-full"
+					name="platform"
+					value={data.platform.id.split(':')[1]}>
+					Continue as <b>{data.user.name}</b>
+				</button>
 			</form>
 		{:else}
-			<form
-				method="POST"
-				action="?/login">
-				<Input
-					type="text"
-					id="username"
-					value={username}
-					label="Username"
-					placeholder="Username" />
+			<form method="POST" action="?/login">
+				<Input type="text" id="username" value={username} label="Username" placeholder="Username" />
 				{#if data.platform}
 					<input type="hidden" name="platform" value={data.platform.name} />
 				{/if}

@@ -17,7 +17,7 @@ export async function POST({ request }) {
 	if (!Array.isArray(expectedChallenge[0])) {
 		return json({ status: 'error', error: 'Error reading data' });
 	}
-	[ expectedChallenge ] = expectedChallenge[0];
+	[expectedChallenge] = expectedChallenge[0];
 
 	let authenticator = await _rootDB.query(
 		'SELECT * FROM authenticator WHERE credentialID = $credentialID',
@@ -28,7 +28,7 @@ export async function POST({ request }) {
 	if (!Array.isArray(authenticator[0])) {
 		return json({ status: 'error', error: 'Error reading data' });
 	}
-	[ authenticator ] = authenticator[0];
+	[authenticator] = authenticator[0];
 	authenticator.credentialID = base64DecodeURL(authenticator.credentialID);
 	authenticator.credentialPublicKey = base64DecodeURL(authenticator.credentialPublicKey);
 

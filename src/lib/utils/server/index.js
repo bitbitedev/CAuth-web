@@ -6,7 +6,7 @@ export async function getPlatformByName(name) {
 		error(400, { message: 'Invalid request. Specify referrer or remove the ref parameter' });
 	else if (name) {
 		const _rootDB = await rootDB;
-		const [[ platform ]] = await _rootDB.query('SELECT * FROM platform WHERE name = $name', {
+		const [[platform]] = await _rootDB.query('SELECT * FROM platform WHERE name = $name', {
 			name: name
 		});
 		if (!platform) {
@@ -15,4 +15,4 @@ export async function getPlatformByName(name) {
 
 		return platform;
 	} else return undefined;
-};
+}

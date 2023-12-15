@@ -67,11 +67,10 @@
 	</div>
 	<div class="card bg-base-100 shadow-2xl">
 		<div class="card-body">
-			<div class="card-title">
-				Secrets
-			</div>
+			<div class="card-title">Secrets</div>
 			<p>
-				Here you can manage secrets for this platform. Secrets are used to authenticate the platform when using the AP.
+				Here you can manage secrets for this platform. Secrets are used to authenticate the platform
+				when using the AP.
 			</p>
 			<table>
 				<thead>
@@ -85,12 +84,16 @@
 					{#each data.secrets as secret}
 						<tr>
 							<td>{secret.name}</td>
-							<td class="text-center">{new Date(secret.createdAt).toLocaleDateString(data.lang)}</td>
+							<td class="text-center">
+								{new Date(secret.createdAt).toLocaleDateString(data.lang)}
+							</td>
 							<td>
-								<button class="btn btn-error btn-circle text-white btn-sm text-xl" onclick="modal_secret_delete_{secret.id.split(':')[1]}.showModal();">
-									<Delete/>
+								<button
+									class="btn btn-error btn-circle text-white btn-sm text-xl"
+									onclick="modal_secret_delete_{secret.id.split(':')[1]}.showModal();">
+									<Delete />
 								</button>
-								<ModalSecretDelete secret={secret} platform={data.platform}/>
+								<ModalSecretDelete {secret} platform={data.platform} />
 							</td>
 						</tr>
 					{/each}
@@ -102,7 +105,9 @@
 				</tbody>
 			</table>
 			<div class="card-actions">
-				<a href="?/createSecret" class="btn btn-primary" onclick="modal_secret_create.showModal();">Generate new secret</a>
+				<a href="?/createSecret" class="btn btn-primary" onclick="modal_secret_create.showModal();">
+					Generate new secret
+				</a>
 			</div>
 		</div>
 	</div>
@@ -147,8 +152,10 @@
 		<h3 class="font-bold text-lg">Created secret for {data.platform.name}</h3>
 		<p class="py-4">
 			A new secret has been created. Copy and save it from the textbox below.
-			<span class="text-warning">Once you close this modal it can not be retreived again and if you lose
-			it you need to create a new one.</span>
+			<span class="text-warning">
+				Once you close this modal it can not be retreived again and if you lose it you need to
+				create a new one.
+			</span>
 		</p>
 		<textarea readonly class="textarea w-full bg-base-300 text-white">{form?.secret}</textarea>
 		<form method="dialog">

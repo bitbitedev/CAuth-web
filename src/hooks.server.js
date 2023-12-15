@@ -22,14 +22,14 @@ export const handle = async ({ event, resolve }) => {
 	}
 	try {
 		response = await resolve(event);
-	} catch(err) {
-		response = new Response("Something went wrong.", {
+	} catch (err) {
+		response = new Response('Something went wrong.', {
 			status: 500,
 			statusText: 'Internal Server Error'
-		})
+		});
 	} finally {
 		_db.close();
 	}
-	
+
 	return response;
 };
