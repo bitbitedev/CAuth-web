@@ -57,6 +57,7 @@ async function getChallenge({ request }) {
 		Object.prototype.hasOwnProperty.call(body, 'username') &&
 		Object.prototype.hasOwnProperty.call(body, 'code')
 	) {
+		const _rootDB = await rootDB;
 		let [user] = await _rootDB.select(`user:${body.username}`);
 		if (user === undefined) {
 			error(500, { message: 'User not found' });
@@ -69,7 +70,6 @@ async function getChallenge({ request }) {
 			userName: body.username,
 			attestationType: 'direct'
 		});
-		const _rootDB = await rootDB;
 		const authReq = await _rootDB.create('authRequest', {
 			challenge: options.challenge,
 			createdAt: new Date(),
