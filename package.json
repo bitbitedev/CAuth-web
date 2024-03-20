@@ -20,7 +20,7 @@
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.35.1",
 		"nodemailer": "^6.9.12",
-		"postcss": "^8.4.36",
+		"postcss": "^8.4.37",
 		"postcss-load-config": "^5.0.3",
 		"postcss-nesting": "^12.1.0",
 		"prettier": "^3.2.5",
