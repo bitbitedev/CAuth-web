@@ -33,7 +33,7 @@
 	"dependencies": {
 		"@simplewebauthn/browser": "^9.0.1",
 		"@simplewebauthn/server": "^10.0.0",
-		"surrealdb.js": "^0.11.0",
+		"surrealdb.js": "^0.11.1",
 		"svelte-material-icons": "^3.0.5"
 	}
 }
