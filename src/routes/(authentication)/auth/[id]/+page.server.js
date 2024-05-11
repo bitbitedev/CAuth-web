@@ -30,7 +30,7 @@ export async function load({ params, url }) {
 	authenticators = authenticators[0];
 	const options = await generateAuthenticationOptions({
 		allowCredentials: authenticators.map((authenticator) => ({
-			id: authenticator.credentialID,
+			id: base64DecodeURL(authenticator.credentialID),
 			type: 'public-key'
 		})),
 		userVerification: 'preferred'

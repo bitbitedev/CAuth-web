@@ -31,8 +31,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@simplewebauthn/browser": "^10.0.0",
-		"@simplewebauthn/server": "^10.0.0",
+		"@simplewebauthn/browser": "^9.0.1",
+		"@simplewebauthn/server": "^9.0.3",
 		"surrealdb.js": "^0.11.1",
 		"svelte-material-icons": "^3.0.5"
 	}
