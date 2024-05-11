@@ -29,8 +29,8 @@ export async function POST({ request }) {
 		return json({ status: 'error', error: 'Error reading data' });
 	}
 	[authenticator] = authenticator[0];
-	authenticator.credentialID = base64DecodeURL(authenticator.credentialID);
-	authenticator.credentialPublicKey = base64DecodeURL(authenticator.credentialPublicKey);
+	authenticator.credentialID = authenticator.credentialID;
+	authenticator.credentialPublicKey = authenticator.credentialPublicKey;
 
 	let verification;
 	try {
