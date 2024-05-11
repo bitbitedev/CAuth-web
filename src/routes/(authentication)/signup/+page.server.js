@@ -63,7 +63,7 @@ const verify = async ({ request, cookies }) => {
 			expectedRPID: RP_ID
 		});
 	} catch (err) {
-		rootDB.merge(`authRequest:${id}`, {
+		_rootDB.merge(`authRequest:${id}`, {
 			status: 'failed'
 		});
 		error(500, { message: 'Error verifying registration' });
@@ -71,7 +71,7 @@ const verify = async ({ request, cookies }) => {
 	const { verified, registrationInfo } = verification;
 	const { credentialPublicKey, credentialID, counter } = registrationInfo;
 	if (!verified) {
-		rootDB.merge(`authRequest:${id}`, {
+		_rootDB.merge(`authRequest:${id}`, {
 			status: 'failed'
 		});
 		error(500, { message: 'Error verifying registration' });
@@ -96,13 +96,13 @@ const verify = async ({ request, cookies }) => {
 			}
 		);
 		cookies.set('token', token, { path: '/' });
-		rootDB.merge(`authRequest:${id}`, {
+		_rootDB.merge(`authRequest:${id}`, {
 			status: 'verified',
 			authenticator: authenticator
 		});
 	} catch (err) {
 		console.log(err);
-		rootDB.merge(`authRequest:${id}`, {
+		_rootDB.merge(`authRequest:${id}`, {
 			status: 'failed'
 		});
 		error(500, { message: 'Signup failed' });
