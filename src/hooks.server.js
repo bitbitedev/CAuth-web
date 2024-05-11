@@ -13,7 +13,7 @@ export const handle = async ({ event, resolve }) => {
 				event.locals.db = _db;
 				event.locals.loggedIn = true;
 				event.locals.settings = (await _db.select('userSettings'))[0];
-				event.locals.lang = event.locals.settings.lang ?? event.locals.lang;
+				event.locals.lang = event.locals.settings?.lang ?? event.locals.lang;
 				event.locals.user = (await _db.query('SELECT name, email FROM $auth'))[0][0];
 			}
 		} catch (e) {
