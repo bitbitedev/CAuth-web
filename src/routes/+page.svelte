@@ -1,3 +1,11 @@
+<script>
+	import { onMount } from "svelte";
+	import { invalidateAll } from "$app/navigation";
+
+	onMount(() => {
+		invalidateAll();
+	});
+</script>
 <div class="flex justify-center p-5">
 	<div id="home" class="content">
 		<h1>C-Auth - the next step for privacy and digital security in the Internet</h1>

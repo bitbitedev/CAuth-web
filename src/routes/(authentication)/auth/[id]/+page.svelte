@@ -51,7 +51,6 @@
 	onMount(() => {
 		if (!data.external) {
 			interval = setInterval(async () => {
-				console.log('fetching');
 				authRequestData = await (await fetch(`/api/v1/authRequest/${data.id}`)).json();
 				if (authRequestData.external && !data.external) {
 					error = '';
@@ -65,7 +64,6 @@
 						showButton = true;
 					}
 					if (authRequestData.status == 'verified') {
-						console.log(authRequestData.redirectUrl);
 						goto(authRequestData.redirectUrl);
 					}
 				}
