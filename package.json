@@ -18,7 +18,7 @@
 		"daisyui": "^4.12.10",
 		"eslint": "^9.9.0",
 		"eslint-config-prettier": "^9.1.0",
-		"eslint-plugin-svelte": "^2.43.0",
+		"eslint-plugin-svelte": "^2.45.1",
 		"nodemailer": "^6.9.14",
 		"postcss": "^8.4.45",
 		"postcss-load-config": "^6.0.1",
