@@ -1,4 +1,4 @@
-import Surreal from 'surrealdb.js';
+import Surreal from 'surrealdb';
 import { DB_HOST, DB_USER, DB_PASSWORD, DB_NAMESPACE, DB_DATABASE } from '$env/static/private';
 
 /**

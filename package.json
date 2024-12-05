@@ -8,7 +8,7 @@
 		"preview": "vite preview",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
-		"db": "screen -AmdS cauthdb surreal start -A --auth file://db"
+		"db": "screen -AmdS cauthdb surreal start rocksdb:db"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-node": "^5.2.9",
@@ -33,7 +33,7 @@
 	"dependencies": {
 		"@simplewebauthn/browser": "^9.0.1",
 		"@simplewebauthn/server": "^9.0.3",
-		"surrealdb.js": "^0.11.1",
+		"surrealdb": "^1.1.0",
 		"svelte-material-icons": "^3.0.5"
 	}
 }
